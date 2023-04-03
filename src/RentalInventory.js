@@ -1,19 +1,20 @@
+
 // Canon 5D
-import canon5d1 from './../public/img/inventory/canon-5d-1.jpg'
-import canon5d2 from './../public/img/inventory/canon-5d-2.jpg'
-import canon5d3 from './../public/img/inventory/canon-5d-3.jpg'
+const canon5d1 = '/img/inventory/canon-5d-1.jpg'
+const canon5d2 = '/img/inventory/canon-5d-2.jpg'
+const canon5d3 = '/img/inventory/canon-5d-3.jpg'
 // Canon 7D
-import canon7d1 from './../public/img/inventory/canon-7d-1.jpg'
-import canon7d2 from './../public/img/inventory/canon-7d-2.jpg'
-import canon7d3 from './../public/img/inventory/canon-7d-3.jpg'
+const canon7d1 = '/img/inventory/canon-7d-1.jpg'
+const canon7d2 = '/img/inventory/canon-7d-2.jpg'
+const canon7d3 = '/img/inventory/canon-7d-3.jpg'
 // Nikon D850
-import nikonD8501 from './../public/img/inventory/nikon-D850-1.jpg'
-import nikonD8502 from './../public/img/inventory/nikon-D850-2.jpg'
-import nikonD8503 from './../public/img/inventory/nikon-D850-3.jpg'
+const nikonD8501 = '/img/inventory/nikon-D850-1.jpg'
+const nikonD8502 = '/img/inventory/nikon-D850-2.jpg'
+const nikonD8503 = '/img/inventory/nikon-D850-3.jpg'
 // Red Dragon Cinema Camera
-import redDragon1 from './../public/img/inventory/red-dragon-1.jpg'
-import redDragon2 from './../public/img/inventory/red-dragon-2.jpg'
-import redDragon3 from './../public/img/inventory/red-dragon-3.jpg'
+const redDragon1 = '/img/inventory/red-dragon-cinema-1.jpg'
+const redDragon2 = '/img/inventory/red-dragon-cinema-2.jpg'
+const redDragon3 = '/img/inventory/red-dragon-cinema-3.jpg'
 
 const rentalEquipment = [
   {
