@@ -15,6 +15,7 @@ export default function RentalDetails({ item, onCloseClick }) {
         )}
         <p>{item.description}</p>
         <Button variant='outline-dark'>Add to Quote</Button>
+        {` `}
         <Button variant='outline-dark' onClick={onCloseClick}>Close</Button>
         </>
     )

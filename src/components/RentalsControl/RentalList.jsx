@@ -34,6 +34,8 @@ export default function RentalList({ onItemClick }) {
                                 {item.description}
                             </Card.Text>
                             <Button variant="outline-dark">Add to Quote</Button>
+                            {` `}
+                            <Button variant="outline-dark" onClick={() => onItemClick(item)}>See Details</Button>
                             </Card.Body>
                         </Card>
                         )}
