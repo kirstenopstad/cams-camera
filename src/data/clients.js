@@ -1,15 +1,15 @@
 const clients = [
   {
-    name: "test",
-    logo: "favicon.ico",
+    name: "Google",
+    logo: "https://blog.hubspot.com/hubfs/image8-2.jpg",
   },
   {
     name: "Very very very very long brand name with way too many words lol",
-    logo: "favicon.ico",
+    logo: "/favicon.ico",
   },
   {
     name: "Very large image test",
-    logo: "img/camera-closeup.jpg",
+    logo: "/img/camera-closeup.jpg",
   },
 ];
 
