@@ -6,7 +6,6 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import RentalsControl from '@/components/RentalsControl'
 import GetQuote from '@/components/RentalsControl/GetQuote'
-import Clients from '@/components/Clients'
 import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
