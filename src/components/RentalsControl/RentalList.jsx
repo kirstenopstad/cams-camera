@@ -1,4 +1,4 @@
-import inventory from './../../RentalInventory'
+import inventory from '@/data/RentalInventory'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -16,13 +16,13 @@ export default function RentalList({ onItemClick }) {
                 <Col>
                     {inventory.map((item) => 
                         <Card key={item.id} xs={1} lg={2} style={{ width: '25rem' }}>
-                            {/* <Carousel>
-                                <Carousel.Item>
-                                {item.photos.map((photo, index) => 
-                                    <img key={`${item}${index}`} className="d-block w-100" src={photo}/>
-                                    )}
-                                </Carousel.Item>
-                            </Carousel> */}
+                        {/* <Carousel>
+                            <Carousel.Item>
+                            {item.photos.map((photo, index) => 
+                                <img key={`${item}${index}`} className="d-block w-100" src={photo}/>
+                                )}
+                            </Carousel.Item>
+                        </Carousel> */}
                             <Card.Img 
                                 variant="top" 
                                 src={item.photos[0]}
