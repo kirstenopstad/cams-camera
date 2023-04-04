@@ -11,8 +11,8 @@ import styles from '@/styles/Rentals.module.css';
 export default function RentalList({ onItemClick }) {
     return (
         <>
-        <Container>
-            <Row xs={1} md={2} className='g-4'>
+        <Container >
+            <Row xs={1} md={2} className={`g-4 ${styles.cards}`}>
                 <Col>
                     {inventory.map((item) => 
                         <Card key={item.id} xs={1} lg={2} style={{ width: '25rem' }}>
