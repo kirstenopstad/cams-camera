@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Carousel from 'react-bootstrap/Carousel';
 import styles from '@/styles/Rentals.module.css';
 
-export default function RentalList({ onItemClick }) {
+export default function RentalList({ onItemClick, onSave }) {
     return (
         <>
         <Container>
@@ -33,7 +33,7 @@ export default function RentalList({ onItemClick }) {
                             <Card.Text>
                                 {item.description}
                             </Card.Text>
-                            <Button variant="outline-dark">Add to Quote</Button>
+                            <Button variant="outline-dark" onClick={() => onSave(item)}>Add to Quote</Button>
                             {` `}
                             <Button variant="outline-dark" onClick={() => onItemClick(item)}>See Details</Button>
                             </Card.Body>
@@ -47,5 +47,6 @@ export default function RentalList({ onItemClick }) {
 }
 
 RentalList.propTypes = {
-    onItemClick: PropTypes.func
+    onItemClick: PropTypes.func,
+    onSave: PropTypes.func
 }

@@ -20,7 +20,6 @@ export default function Home() {
       <main>
         <Clients/>
         <RentalsControl />
-        <GetQuote />
       </main>
     </>
   )
