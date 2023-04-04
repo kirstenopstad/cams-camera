@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { filterCart } from "@/utils/cart";
 
 export default function Cart({ items }) {
   const [newItems, setNewItems] = useState([]);
@@ -8,22 +9,9 @@ export default function Cart({ items }) {
 
   // filter 1 of each item
   useEffect(() => {
-    let checkItems = [];
-    let itemCount = {};
-    setNewItems(
-      items.filter((i) => {
-        const iName = i.model.replace(/ /g, "_");
-        if (checkItems.includes(i)) {
-          itemCount[iName] += 1;
-          return false;
-        } else {
-          checkItems.push(i);
-          itemCount[iName] = 1;
-          return true;
-        }
-      })
-    );
-    setCount(itemCount);
+    const checkItems = filterCart(items);
+    setNewItems(checkItems.items);
+    setCount(checkItems.count);
   }, [items]);
 
   return (
@@ -33,7 +21,8 @@ export default function Cart({ items }) {
         return (
           <>
             <p>
-              {item.brand} {item.model} {count[itemName] > 1 ? `* ${count[itemName]}` : null}
+              {item.brand} {item.model}{" "}
+              {count[itemName] > 1 ? `* ${count[itemName]}` : null}
             </p>
           </>
         );
