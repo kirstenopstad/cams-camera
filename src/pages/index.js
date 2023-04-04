@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Clients from '@/components/Clients'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import RentalsControl from '@/components/RentalsControl'
@@ -22,9 +23,7 @@ export default function Home() {
         <Clients />
         <RentalsControl />
         <Footer />
-        
       </main>
-      <GetQuote />
     </>
   )
 }

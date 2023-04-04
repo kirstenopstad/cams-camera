@@ -1,4 +1,4 @@
-import inventory from './../../RentalInventory'
+import inventory from '@/data/RentalInventory'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Carousel from 'react-bootstrap/Carousel';
 import styles from '@/styles/Rentals.module.css';
 
-export default function RentalList({ onItemClick }) {
+export default function RentalList({ onItemClick, onSave }) {
     return (
         <>
         <Container >
@@ -16,13 +16,13 @@ export default function RentalList({ onItemClick }) {
                 <Col>
                     {inventory.map((item) => 
                         <Card key={item.id} xs={1} lg={2} style={{ width: '25rem' }}>
-                            {/* <Carousel>
-                                <Carousel.Item>
-                                {item.photos.map((photo, index) => 
-                                    <img key={`${item}${index}`} className="d-block w-100" src={photo}/>
-                                    )}
-                                </Carousel.Item>
-                            </Carousel> */}
+                        {/* <Carousel>
+                            <Carousel.Item>
+                            {item.photos.map((photo, index) => 
+                                <img key={`${item}${index}`} className="d-block w-100" src={photo}/>
+                                )}
+                            </Carousel.Item>
+                        </Carousel> */}
                             <Card.Img 
                                 variant="top" 
                                 src={item.photos[0]}
@@ -33,7 +33,7 @@ export default function RentalList({ onItemClick }) {
                             <Card.Text>
                                 {item.description}
                             </Card.Text>
-                            <Button variant="outline-dark">Add to Quote</Button>
+                            <Button variant="outline-dark" onClick={() => onSave(item)}>Add to Quote</Button>
                             {` `}
                             <Button variant="outline-dark" onClick={() => onItemClick(item)}>See Details</Button>
                             </Card.Body>
@@ -47,5 +47,6 @@ export default function RentalList({ onItemClick }) {
 }
 
 RentalList.propTypes = {
-    onItemClick: PropTypes.func
+    onItemClick: PropTypes.func,
+    onSave: PropTypes.func
 }
