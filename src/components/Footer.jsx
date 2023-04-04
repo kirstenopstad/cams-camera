@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import sendEmail from "../../SendEmail"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default function Footer() {
+    const [emailStatusMsg, setEmailStatusMsg] = useState(null);
     
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -14,13 +16,13 @@ export default function Footer() {
             message: e.target.message.value
         }
         // run SendEmail(formData) to send email
-        const message = sendEmail(formData)
-        return message;
+        sendEmail(formData)
     }
 
     return (
         <>
             <Form onSubmit={handleFormSubmit}>
+                <p>{emailStatusMsg}</p>                 
                 <h3>Contact Us</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -34,11 +36,9 @@ export default function Footer() {
                     <Form.Label>Message</Form.Label>
                     <Form.Control type="text" as="textarea" style={{ height: '100px' }} placeholder="Message" name="message" required/>
                 </Form.Group>
-
-                
-                <Button variant="primary" type="submit">
+                <Button variant="outline-dark" type="submit">
                     Submit
-                </Button>
+                </Button> 
             </Form>
         </>
     )

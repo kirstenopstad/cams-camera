@@ -6,7 +6,6 @@ const CC_LIST = "kirsten.opstad@gmail.com, builtbyko@gmail.com"
 
 // takes formData as input and returns success or error message
 const sendEmail = (formData) => {
-  console.log(formData)
   // NOTE: ensure formData.emailType is included
   let templateParams = {};
   let templateId = null;
@@ -33,17 +32,22 @@ const sendEmail = (formData) => {
     // use intro template (sent to client, cc'd to ccList)
     templateId = process.env.NEXT_PUBLIC_EMAILJS_QUOTE_TEMPLATE_ID;
   }
+  let resultObject;
+
   emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, templateId, templateParams, process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
   .then((result) => {
       // return success message
       if (result.status === 200) {
-        return (`${result.status} - ${result.text}`)
+        resultObject = result;
+        return result
       }
-      console.log(result)
     }, (error) => {
       // return error message
-      return (`${error.status} - ${error.text}`)
+      resultObject = error;
+       return error
   });
+
+  return resultObject
 };
 
 export default sendEmail;
