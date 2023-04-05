@@ -20,9 +20,11 @@ function GetQuote({items}) {
     const [baseCharge, setBaseCharge] = useState('');
     const [deliveryFee, setDeliveryFee] = useState('');
     const [emailStatusMsg, setEmailStatusMsg] = useState(null);
+    const [itemCount, setItemCount] = useState('');
 
     const minDate = new Date();
     minDate.setDate(minDate.getDate() + 14);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,9 +33,10 @@ function GetQuote({items}) {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const numWeeks = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 7)); // Round up to the nearest week
-
+        // gets items count from cart
+        const itemCount = items.length;
         // Calculate the base charge based on the number of weeks
-        const weeklyCharge = 100; // Change this to the actual weekly charge
+        const weeklyCharge = itemCount * 50; // this gives us our item per week amount
         const baseCharge = numWeeks * weeklyCharge;
         
         //Calculate delivery fee
@@ -98,11 +101,12 @@ function GetQuote({items}) {
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
         //confirmation
-        alert(`Your Subtotal is ${subTotal}`);
+        alert(`Your count is ${itemCount}`);
         //updates subtotal state
         setSubTotal(subTotal);
         setBaseCharge(baseCharge);
         setDeliveryFee(deliveryFee);
+        setItemCount(itemCount);
         //update formSubmitted state
         setFormSubmitted(true);
         //reset form
@@ -122,17 +126,16 @@ function GetQuote({items}) {
             <div className={styles.cartStyle}>
             <h4>Your cart:</h4>
             <Cart items={items} />
-            {/* Place holder 
-                text for the
-                cart props or 
-                whatever */}
             <hr />
             </div>
                 <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
+
                             <p>{emailStatusMsg}</p>
                             <h2>Weekly Cost:${baseCharge} </h2>
+                            <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2>
+                            <h2>Cost of duration of rental: ${baseCharge} </h2>
                             <h2>Delivery Cost: ${deliveryFee}</h2>
                             <h1>Subtotal: ${subTotal}</h1>
                         </div>
