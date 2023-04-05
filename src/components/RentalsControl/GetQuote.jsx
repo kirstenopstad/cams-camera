@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Cart from "./Cart";
 import PropTypes from "prop-types";
 import styles from '@/styles/Rentals.module.css';
+import buildQuote from "@/utils/buildQuote";
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -39,8 +40,26 @@ function GetQuote({items}) {
         //Calculate the total charge
         const subTotal = baseCharge + deliveryFee
 
-        
+        // Dummy cart to test data
+        const cart = [
+            {
+                brand: 'Canon',
+                model: '5D',
+                quantity: 2,
+            },
+            {
+                brand: 'Canon',
+                model: '7D',
+                quantity: 3,
+            }
+        ]
+
         const formData = {
+            quoteDate: new Date(),
+            quoteNumber: 1,     
+            // TODO: add unique quote nummber
+            cart: cart,             
+            // Expecting an array of items with properties brand, model & quantity
             name: name,
             email: email,
             phone: phone,
@@ -48,9 +67,16 @@ function GetQuote({items}) {
             endDate: endDate,
             delivery: delivery,
             address: address,
+            baseCharge: baseCharge,
+            deliveryFee: deliveryFee,
             subTotal: subTotal,
         };
         
+        //build quote message
+        const emailMessage = buildQuote(formData)
+        //send email
+
+
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
         //confirmation
@@ -69,6 +95,9 @@ function GetQuote({items}) {
         setEndDate('');
         setDelivery(false);
         setAddress('');
+
+        // send Email
+        
     }
 
     return (
