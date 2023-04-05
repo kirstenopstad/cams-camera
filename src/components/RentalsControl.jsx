@@ -1,39 +1,32 @@
-import { useState } from 'react'
-import RentalList from './RentalsControl/RentalList'
-import RentalDetails from './RentalsControl/RentalDetails'
-import Container from 'react-bootstrap/Container';
-
+import { useState } from "react";
+import RentalList from "./RentalsControl/RentalList";
+import RentalDetails from "./RentalsControl/RentalDetails";
+import GetQuote from "./RentalsControl/GetQuote";
 
 export default function RentalsControl() {
-    const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [cart, setCart] = useState([]);
 
-    // handleItemClick to update selected item
-    const handleItemClick = (item) => {
-        setSelectedItem(item)
-    }
-    // handleDetailClose to make selected item null
-    const handleDetailClose = () => {
-        setSelectedItem(null)
-    }
+  const handleSave = (item) => {
+    setCart([...cart, item]);
+  };
 
-    // conditional rendering 
-    let content = <RentalList 
-                    onItemClick={handleItemClick}
-                    />
-    // if selected item, content = item detail
-    if (selectedItem) {
-        content = <RentalDetails 
-                    item={selectedItem}
-                    onCloseClick={handleDetailClose}
-                    />
-    }
-
-    return (
-        <>
-        <Container>
-            <h1>Rentals</h1>
-            {content}
-        </Container>
-        </>
-    )
+  return (
+    <>
+      <h1>Rentals</h1>
+      {
+        // if selected item show item detail else show item list
+        selectedItem ? (
+          <RentalDetails
+            item={selectedItem}
+            onCloseClick={setSelectedItem}
+            onSave={handleSave}
+          />
+        ) : (
+          <RentalList onItemClick={setSelectedItem} onSave={handleSave} />
+        )
+      }
+      <GetQuote items={cart} />
+    </>
+  );
 }
