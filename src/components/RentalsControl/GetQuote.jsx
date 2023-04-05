@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+import React, {useState} from "react";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Cart from "./Cart";
 import PropTypes from "prop-types";
-import "react-datepicker/dist/react-datepicker.css";
+import styles from '@/styles/Rentals.module.css';
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -14,6 +15,8 @@ function GetQuote({items}) {
     const [address, setAddress] = useState('');
     const [subTotal, setSubTotal] = useState(0);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [baseCharge, setBaseCharge] = useState('');
+    const [deliveryFee, setDeliveryFee] = useState('');
 
     const minDate = new Date();
     minDate.setDate(minDate.getDate() + 14);
@@ -54,6 +57,8 @@ function GetQuote({items}) {
         alert(`Your Subtotal is ${subTotal}`);
         //updates subtotal state
         setSubTotal(subTotal);
+        setBaseCharge(baseCharge);
+        setDeliveryFee(deliveryFee);
         //update formSubmitted state
         setFormSubmitted(true);
         //reset form
@@ -68,20 +73,21 @@ function GetQuote({items}) {
 
     return (
         <React.Fragment>
-            <h1>Get Your Quote!</h1>
+            <h1 className={styles.headerStyle}>Get Your Quote!</h1>
+            <div className={styles.cartStyle}>
             <h4>Your cart:</h4>
             <Cart items={items} />
             {/* Place holder 
                 text for the
                 cart props or 
                 whatever */}
-
-
-                <div>
+            <hr />
+            </div>
+                <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
-                            {/* <h2>Weekly Cost: ${baseCharge}</h2>
-                            <h2>Delivery Cost: ${deliveryFee}</h2> */}
+                            <h2>Weekly Cost:${baseCharge} </h2>
+                            <h2>Delivery Cost: ${deliveryFee}</h2>
                             <h1>Subtotal: ${subTotal}</h1>
                         </div>
                     ) :(
@@ -162,7 +168,7 @@ function GetQuote({items}) {
                                 />
                         </label>
                     )}
-
+                    <br />
                     <button type="submit">Submit</button>
                 </form>
                 )}
