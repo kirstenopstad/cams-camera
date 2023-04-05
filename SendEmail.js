@@ -32,22 +32,18 @@ const sendEmail = (formData) => {
     // use intro template (sent to client, cc'd to ccList)
     templateId = process.env.NEXT_PUBLIC_EMAILJS_QUOTE_TEMPLATE_ID;
   }
-  let resultObject;
 
-  emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, templateId, templateParams, process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
+  return emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, templateId, templateParams, process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
   .then((result) => {
       // return success message
       if (result.status === 200) {
-        resultObject = result;
         return result
       }
     }, (error) => {
       // return error message
-      resultObject = error;
        return error
   });
 
-  return resultObject
 };
 
 export default sendEmail;
