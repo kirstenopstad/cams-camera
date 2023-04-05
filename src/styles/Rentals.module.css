@@ -1,3 +1,20 @@
 .cards {
   background-color: aquamarine;
 }
+
+
+.headerStyle {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 3rem;
+}
+
+.bodyStyle {
+  background-color: aquamarine;
+  margin: 5%;
+}
+
+.cartStyle {
+  background-color: rgb(141, 255, 217);
+  margin: 4%;
+}
