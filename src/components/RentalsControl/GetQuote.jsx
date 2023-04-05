@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import PropTypes from "prop-types";
 import styles from '@/styles/Rentals.module.css';
 import buildQuote from "@/utils/buildQuote";
+import sendEmail from "../../../SendEmail";
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -18,6 +19,7 @@ function GetQuote({items}) {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [baseCharge, setBaseCharge] = useState('');
     const [deliveryFee, setDeliveryFee] = useState('');
+    const [emailStatusMsg, setEmailStatusMsg] = useState(null);
 
     const minDate = new Date();
     minDate.setDate(minDate.getDate() + 14);
@@ -74,8 +76,24 @@ function GetQuote({items}) {
         
         //build quote message
         const emailMessage = buildQuote(formData)
-        //send email
-
+        //build emailData
+        const emailData = {
+            emailType: "quote",
+            userName: formData.name,
+            userEmail: formData.email,
+            userPhoneNumber: formData.phone,
+            message: emailMessage,
+        }
+        // end email
+        sendEmail(emailData)
+            .then((result) => {
+                if (result.status === 200) {
+                    // clearForm(e);
+                    setEmailStatusMsg(`Check your inbox for your quote!`)
+                } else {
+                    setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
+                }
+            })
 
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
@@ -96,8 +114,6 @@ function GetQuote({items}) {
         setDelivery(false);
         setAddress('');
 
-        // send Email
-        
     }
 
     return (
@@ -115,6 +131,7 @@ function GetQuote({items}) {
                 <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
+                            <p>{emailStatusMsg}</p>
                             <h2>Weekly Cost:${baseCharge} </h2>
                             <h2>Delivery Cost: ${deliveryFee}</h2>
                             <h1>Subtotal: ${subTotal}</h1>

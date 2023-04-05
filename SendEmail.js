@@ -19,13 +19,13 @@ const sendEmail = (formData) => {
     };
     // use intro template (sent to company)
     templateId = process.env.NEXT_PUBLIC_EMAILJS_INTRO_TEMPLATE_ID;
-  } else if (emailType === "quote") {
+  } else if (formData.emailType === "quote") {
     // TODO: build message for quote
     templateParams = {
       userName: formData.userName,
       userEmail: formData.userEmail,
       userPhoneNumber: formData.userPhoneNumber,
-      message: formData.userPhoneNumber,
+      message: formData.message,
       companyName: COMPANY,
       ccList: CC_LIST
     };
