@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from '@/styles/Rentals.module.css'
+import Cart from "./Cart";
+import PropTypes from "prop-types";
+import styles from '@/styles/Rentals.module.css';
 
-
-function GetQuote() {
+function GetQuote({items}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState ('');
@@ -70,14 +71,12 @@ function GetQuote() {
         setAddress('');
     }
 
-
-
-
     return (
         <React.Fragment>
             <h1 className={styles.headerStyle}>Get Your Quote!</h1>
             <div className={styles.cartStyle}>
             <h4>Your cart:</h4>
+            <Cart items={items} />
             {/* Place holder 
                 text for the
                 cart props or 
@@ -176,6 +175,11 @@ function GetQuote() {
                 </div>
         </React.Fragment>
     )
+
+}
+
+GetQuote.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default GetQuote;
