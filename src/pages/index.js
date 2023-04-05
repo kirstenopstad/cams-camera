@@ -1,17 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Clients from '@/components/Clients'
-import Header from '@/components/Header'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import RentalsControl from '@/components/RentalsControl'
-import GetQuote from '@/components/RentalsControl/GetQuote'
-import Clients from '@/components/Clients'
-import Footer from '@/components/Footer'
+import Head from "next/head";
+import Clients from "@/components/Clients";
+import Header from "@/components/Header";
+import RentalsControl from "@/components/RentalsControl";
+import Footer from "@/components/Footer";
+import { loadArray } from "@/utils/api";
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export default function Home({ pages }) {
   return (
     <>
       <Head>
@@ -21,11 +15,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Header/>
+        <Header pages={pages} />
         <Clients />
         <RentalsControl />
         <Footer />
       </main>
     </>
-  )
+  );
+}
+
+export async function getStaticProps() {
+  const pages = await loadArray("/api/paths", "paths");
+  return { props: { pages: pages } };
 }

@@ -1,9 +1,9 @@
 import Nav from "./Header/Nav"
 
-export default function Header() {
+export default function Header({pages}) {
     return (
-        <>
-            <Nav/>
-        </>
+        <div className="w-full">
+            <Nav pages={pages}/>
+        </div>
     )
 }
