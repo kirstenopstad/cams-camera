@@ -44,7 +44,7 @@ const buildQuote = (quoteData) => {
   Esitmated Tax: 
   Estimated Grand Total: $${quoteData.subTotal}
   `
-  console.log(quote);
+  // console.log(quote);
 
   return quote
 }

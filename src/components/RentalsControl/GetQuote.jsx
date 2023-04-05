@@ -7,6 +7,7 @@ import styles from '@/styles/Rentals.module.css';
 import buildQuote from "@/utils/buildQuote";
 import sendEmail from "../../../SendEmail";
 import { filterCart } from "@/utils/cart";
+import Table from 'react-bootstrap/Table';
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -22,6 +23,7 @@ function GetQuote({items}) {
     const [deliveryFee, setDeliveryFee] = useState('');
     const [emailStatusMsg, setEmailStatusMsg] = useState(null);
     const [itemCount, setItemCount] = useState('');
+    const [cartSummary, setCartSummary] = useState({});
 
     const minDate = new Date();
     minDate.setDate(minDate.getDate() + 14);
@@ -47,7 +49,9 @@ function GetQuote({items}) {
             // add item subtotal to weekly subtotal
             weeklySubtotal += itemTotal
             // add quantity to cart summary
-            item.quantity = cartSummary.count[`${iName}`]
+            item.quantity = cartSummary.count[`${iName}`];
+            // add item subtotal to cart summary
+            item.subtotal = itemTotal
         })
 
         // gets items count from cart
@@ -92,15 +96,15 @@ function GetQuote({items}) {
             message: emailMessage,
         }
         //send email
-        // sendEmail(emailData)
-        //     .then((result) => {
-        //         if (result.status === 200) {
-        //             // clearForm(e);
-        //             setEmailStatusMsg(`Check your inbox for your quote!`)
-        //         } else {
-        //             setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
-        //         }
-        //     })
+        sendEmail(emailData)
+            .then((result) => {
+                if (result.status === 200) {
+                    // clearForm(e);
+                    setEmailStatusMsg(`Check your inbox for your quote!`)
+                } else {
+                    setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
+                }
+            })
 
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
@@ -111,6 +115,7 @@ function GetQuote({items}) {
         setBaseCharge(baseCharge);
         setDeliveryFee(deliveryFee);
         setItemCount(itemCount);
+        setCartSummary(cartSummary);
         //update formSubmitted state
         setFormSubmitted(true);
         //reset form
@@ -135,13 +140,32 @@ function GetQuote({items}) {
                 <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
-
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Qty</th>
+                                        <th>Item</th>
+                                        <th>Unit Price</th>
+                                        <th>Ext. Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cartSummary.items.map((item) => 
+                                    <tr key={item.id}>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.brand} {item.model}</td>
+                                        <td>${item.baseRate}</td>
+                                        <td>${item.subtotal}</td>
+                                    </tr>
+                                    )}
+                                </tbody>
+                            </Table>
                             <p>{emailStatusMsg}</p>
-                            <h2>Weekly Cost:${baseCharge} </h2>
-                            <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2>
-                            <h2>Cost of duration of rental: ${baseCharge} </h2>
+                            <h2>Weekly Subtotal: ${baseCharge} </h2>
+                            {/* <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2> */}
+                            {/* <h2>Cost of duration of rental: ${baseCharge} </h2> */}
                             <h2>Delivery Cost: ${deliveryFee}</h2>
-                            <h1>Subtotal: ${subTotal}</h1>
+                            <h1>Est. Total: ${subTotal}</h1>
                         </div>
                     ) :(
                 <form onSubmit={handleSubmit}>
