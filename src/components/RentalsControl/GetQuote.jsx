@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import styles from '@/styles/Rentals.module.css';
 import buildQuote from "@/utils/buildQuote";
 import sendEmail from "../../../SendEmail";
+import { filterCart } from "@/utils/cart";
+import Table from 'react-bootstrap/Table';
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -21,6 +23,7 @@ function GetQuote({items}) {
     const [deliveryFee, setDeliveryFee] = useState('');
     const [emailStatusMsg, setEmailStatusMsg] = useState(null);
     const [itemCount, setItemCount] = useState('');
+    const [cartSummary, setCartSummary] = useState({});
 
     const minDate = new Date();
     minDate.setDate(minDate.getDate() + 14);
@@ -33,11 +36,30 @@ function GetQuote({items}) {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const numWeeks = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 7)); // Round up to the nearest week
+        // create filtered cart (item, qty)
+        const cartSummary = filterCart(items)
+        // Calculate base weekly subtotal
+        let weeklySubtotal = 0;
+        // for each type of item in cart
+        cartSummary.items.forEach((item) => {
+            // get iName var
+            const iName = item.model.replace(/ /g, "_");
+            // get item total = item base price * qty 
+            const itemTotal = item.baseRate * cartSummary.count[`${iName}`] 
+            // add item subtotal to weekly subtotal
+            weeklySubtotal += itemTotal
+            // add quantity to cart summary
+            item.quantity = cartSummary.count[`${iName}`];
+            // add item subtotal to cart summary
+            item.subtotal = itemTotal
+        })
+
         // gets items count from cart
-        const itemCount = items.length;
+        // const itemCount = items.length;
         // Calculate the base charge based on the number of weeks
-        const weeklyCharge = itemCount * 50; // this gives us our item per week amount
-        const baseCharge = numWeeks * weeklyCharge;
+        // const weeklyCharge = itemCount * 50; // this gives us our item per week amount
+
+        const baseCharge = numWeeks * weeklySubtotal;
         
         //Calculate delivery fee
         const deliveryFee = delivery ? 25 : 0;//Change this to actual weekly charge
@@ -45,26 +67,12 @@ function GetQuote({items}) {
         //Calculate the total charge
         const subTotal = baseCharge + deliveryFee
 
-        // Dummy cart to test data
-        const cart = [
-            {
-                brand: 'Canon',
-                model: '5D',
-                quantity: 2,
-            },
-            {
-                brand: 'Canon',
-                model: '7D',
-                quantity: 3,
-            }
-        ]
-
         const formData = {
             quoteDate: new Date(),
-            quoteNumber: 1,     
             // TODO: add unique quote nummber
-            cart: cart,             
+            quoteNumber: 1,     
             // Expecting an array of items with properties brand, model & quantity
+            cart: cartSummary.items,             
             name: name,
             email: email,
             phone: phone,
@@ -87,7 +95,7 @@ function GetQuote({items}) {
             userPhoneNumber: formData.phone,
             message: emailMessage,
         }
-        // end email
+        // send email
         sendEmail(emailData)
             .then((result) => {
                 if (result.status === 200) {
@@ -101,12 +109,13 @@ function GetQuote({items}) {
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
         //confirmation
-        alert(`Your count is ${itemCount}`);
+        // alert(`Your count is ${itemCount}`);
         //updates subtotal state
         setSubTotal(subTotal);
         setBaseCharge(baseCharge);
         setDeliveryFee(deliveryFee);
         setItemCount(itemCount);
+        setCartSummary(cartSummary);
         //update formSubmitted state
         setFormSubmitted(true);
         //reset form
@@ -131,13 +140,32 @@ function GetQuote({items}) {
                 <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
-
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Qty</th>
+                                        <th>Item</th>
+                                        <th>Unit Price</th>
+                                        <th>Ext. Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cartSummary.items.map((item) => 
+                                    <tr key={item.id}>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.brand} {item.model}</td>
+                                        <td>${item.baseRate}</td>
+                                        <td>${item.subtotal}</td>
+                                    </tr>
+                                    )}
+                                </tbody>
+                            </Table>
                             <p>{emailStatusMsg}</p>
-                            <h2>Weekly Cost:${baseCharge} </h2>
-                            <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2>
-                            <h2>Cost of duration of rental: ${baseCharge} </h2>
+                            <h2>Weekly Subtotal: ${baseCharge} </h2>
+                            {/* <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2> */}
+                            {/* <h2>Cost of duration of rental: ${baseCharge} </h2> */}
                             <h2>Delivery Cost: ${deliveryFee}</h2>
-                            <h1>Subtotal: ${subTotal}</h1>
+                            <h1>Est. Total: ${subTotal}</h1>
                         </div>
                     ) :(
                 <form onSubmit={handleSubmit}>

@@ -12,13 +12,11 @@ const buildQuote = (quoteData) => {
 
   
   let quote = `
-  Thank you for choosing Cam's Camera. Please check that this information is accurate and complete. Note that this represents an estimated cost and does not include tax.
+  Thank you for choosing Cam's Camera. Please check that this information is accurate and complete. Note that this represents an estimated cost and does not include tax. Estimated price only valid for 2-week period. Equipment will not be held without deposit & receipt of completed insurance agreement.
 
   Quote Date: ${quoteData.quoteDate}
   Quote #: ${quoteData.quoteNumber}
 
-  Disclaimer: Estimated price only valid for 2-week period
-  Disclaimer: Equipment will not be held without deposit & Certificate of Insurance
 
   Company: ${quoteData.name}
   Project: ${quoteData.name}
@@ -37,14 +35,17 @@ const buildQuote = (quoteData) => {
     `(${item.quantity}) ${item.brand} ${item.model}`
     )}
 
-  Rental Period: ${quoteData.startDate} - ${quoteData.endDate}
+  Rental Start: ${quoteData.startDate}
+  Rental End: ${quoteData.endDate}
 
   Estimated Subtotal: $${quoteData.baseCharge}
   Estimated Shipping: $${quoteData.deliveryFee}
   Esitmated Tax: 
   Estimated Grand Total: $${quoteData.subTotal}
+
+  To confirm your rental, please reply to this email or call the warehouse at (123)456-7891x012
   `
-  console.log(quote);
+  // console.log(quote);
 
   return quote
 }

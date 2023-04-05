@@ -19,12 +19,10 @@ export default function Cart({ items }) {
       {newItems.map((item) => {
         const itemName = item.model.replace(/ /g, "_");
         return (
-          <>
-            <p>
+            <p key={itemName}>
               {item.brand} {item.model}{" "}
               {count[itemName] > 1 ? `* ${count[itemName]}` : null}
             </p>
-          </>
         );
       })}
     </div>
