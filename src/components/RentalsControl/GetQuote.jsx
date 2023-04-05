@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import styles from '@/styles/Rentals.module.css';
 import buildQuote from "@/utils/buildQuote";
 import sendEmail from "../../../SendEmail";
+import { filterCart } from "@/utils/cart";
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -33,11 +34,28 @@ function GetQuote({items}) {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const numWeeks = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 7)); // Round up to the nearest week
+        // create filtered cart (item, qty)
+        const cartSummary = filterCart(items)
+        // Calculate base weekly subtotal
+        let weeklySubtotal = 0;
+        // for each type of item in cart
+        cartSummary.items.forEach((item) => {
+            // get iName var
+            const iName = item.model.replace(/ /g, "_");
+            // get item total = item base price * qty 
+            const itemTotal = item.baseRate * cartSummary.count[`${iName}`] 
+            // add item subtotal to weekly subtotal
+            weeklySubtotal += itemTotal
+            // add quantity to cart summary
+            item.quantity = cartSummary.count[`${iName}`]
+        })
+
         // gets items count from cart
-        const itemCount = items.length;
+        // const itemCount = items.length;
         // Calculate the base charge based on the number of weeks
-        const weeklyCharge = itemCount * 50; // this gives us our item per week amount
-        const baseCharge = numWeeks * weeklyCharge;
+        // const weeklyCharge = itemCount * 50; // this gives us our item per week amount
+
+        const baseCharge = numWeeks * weeklySubtotal;
         
         //Calculate delivery fee
         const deliveryFee = delivery ? 25 : 0;//Change this to actual weekly charge
@@ -45,26 +63,12 @@ function GetQuote({items}) {
         //Calculate the total charge
         const subTotal = baseCharge + deliveryFee
 
-        // Dummy cart to test data
-        const cart = [
-            {
-                brand: 'Canon',
-                model: '5D',
-                quantity: 2,
-            },
-            {
-                brand: 'Canon',
-                model: '7D',
-                quantity: 3,
-            }
-        ]
-
         const formData = {
             quoteDate: new Date(),
-            quoteNumber: 1,     
             // TODO: add unique quote nummber
-            cart: cart,             
+            quoteNumber: 1,     
             // Expecting an array of items with properties brand, model & quantity
+            cart: cartSummary.items,             
             name: name,
             email: email,
             phone: phone,
@@ -87,21 +91,21 @@ function GetQuote({items}) {
             userPhoneNumber: formData.phone,
             message: emailMessage,
         }
-        // end email
-        sendEmail(emailData)
-            .then((result) => {
-                if (result.status === 200) {
-                    // clearForm(e);
-                    setEmailStatusMsg(`Check your inbox for your quote!`)
-                } else {
-                    setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
-                }
-            })
+        //send email
+        // sendEmail(emailData)
+        //     .then((result) => {
+        //         if (result.status === 200) {
+        //             // clearForm(e);
+        //             setEmailStatusMsg(`Check your inbox for your quote!`)
+        //         } else {
+        //             setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
+        //         }
+        //     })
 
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
         //confirmation
-        alert(`Your count is ${itemCount}`);
+        // alert(`Your count is ${itemCount}`);
         //updates subtotal state
         setSubTotal(subTotal);
         setBaseCharge(baseCharge);
