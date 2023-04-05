@@ -4,6 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Cart from "./Cart";
 import PropTypes from "prop-types";
 import styles from '@/styles/Rentals.module.css';
+import buildQuote from "@/utils/buildQuote";
+import sendEmail from "../../../SendEmail";
 
 function GetQuote({items}) {
     const [name, setName] = useState('');
@@ -17,6 +19,7 @@ function GetQuote({items}) {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [baseCharge, setBaseCharge] = useState('');
     const [deliveryFee, setDeliveryFee] = useState('');
+    const [emailStatusMsg, setEmailStatusMsg] = useState(null);
     const [itemCount, setItemCount] = useState('');
 
     const minDate = new Date();
@@ -42,9 +45,26 @@ function GetQuote({items}) {
         //Calculate the total charge
         const subTotal = baseCharge + deliveryFee
 
-        
-        
+        // Dummy cart to test data
+        const cart = [
+            {
+                brand: 'Canon',
+                model: '5D',
+                quantity: 2,
+            },
+            {
+                brand: 'Canon',
+                model: '7D',
+                quantity: 3,
+            }
+        ]
+
         const formData = {
+            quoteDate: new Date(),
+            quoteNumber: 1,     
+            // TODO: add unique quote nummber
+            cart: cart,             
+            // Expecting an array of items with properties brand, model & quantity
             name: name,
             email: email,
             phone: phone,
@@ -52,9 +72,32 @@ function GetQuote({items}) {
             endDate: endDate,
             delivery: delivery,
             address: address,
+            baseCharge: baseCharge,
+            deliveryFee: deliveryFee,
             subTotal: subTotal,
         };
         
+        //build quote message
+        const emailMessage = buildQuote(formData)
+        //build emailData
+        const emailData = {
+            emailType: "quote",
+            userName: formData.name,
+            userEmail: formData.email,
+            userPhoneNumber: formData.phone,
+            message: emailMessage,
+        }
+        // end email
+        sendEmail(emailData)
+            .then((result) => {
+                if (result.status === 200) {
+                    // clearForm(e);
+                    setEmailStatusMsg(`Check your inbox for your quote!`)
+                } else {
+                    setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
+                }
+            })
+
         //store locally
         localStorage.setItem('formData', JSON.stringify(formData));
         //confirmation
@@ -74,6 +117,7 @@ function GetQuote({items}) {
         setEndDate('');
         setDelivery(false);
         setAddress('');
+
     }
 
     return (
@@ -87,6 +131,9 @@ function GetQuote({items}) {
                 <div className={styles.bodyStyle}>
                     {formSubmitted ? (
                         <div>
+
+                            <p>{emailStatusMsg}</p>
+                            <h2>Weekly Cost:${baseCharge} </h2>
                             <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2>
                             <h2>Cost of duration of rental: ${baseCharge} </h2>
                             <h2>Delivery Cost: ${deliveryFee}</h2>
