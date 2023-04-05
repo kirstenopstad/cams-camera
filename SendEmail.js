@@ -2,7 +2,7 @@ import emailjs from '@emailjs/browser'
 
 // these populate email templates, edit with caution
 const COMPANY = "Cam's Camera"
-const CC_LIST = "kirsten.opstad@gmail.com, builtbyko@gmail.com"
+const CC_LIST = "kirsten.opstad@gmail.com, mauro.rosales247@gmail.com, robbryandev@gmail.com "
 
 // takes formData as input and returns success or error message
 const sendEmail = (formData) => {
