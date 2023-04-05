@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser'
 // these populate email templates, edit with caution
 const COMPANY = "Cam's Camera"
 const CC_LIST = "kirsten.opstad@gmail.com, mauro.rosales247@gmail.com, robbryandev@gmail.com "
+const SUBJECT = "Your quote from Cam's Camera"
 
 // takes formData as input and returns success or error message
 const sendEmail = (formData) => {
@@ -27,7 +28,8 @@ const sendEmail = (formData) => {
       userPhoneNumber: formData.userPhoneNumber,
       message: formData.message,
       companyName: COMPANY,
-      ccList: CC_LIST
+      ccList: CC_LIST,
+      subject: SUBJECT
     };
     // use intro template (sent to client, cc'd to ccList)
     templateId = process.env.NEXT_PUBLIC_EMAILJS_QUOTE_TEMPLATE_ID;

@@ -95,7 +95,7 @@ function GetQuote({items}) {
             userPhoneNumber: formData.phone,
             message: emailMessage,
         }
-        //send email
+        // send email
         sendEmail(emailData)
             .then((result) => {
                 if (result.status === 200) {
