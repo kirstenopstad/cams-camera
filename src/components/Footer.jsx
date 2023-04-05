@@ -17,12 +17,25 @@ export default function Footer() {
         }
         // run SendEmail(formData) to send email
         sendEmail(formData)
+            .then((result) => {
+                if (result.status === 200) {
+                    clearForm(e);
+                    setEmailStatusMsg(`Email sent!`)
+                } else {
+                    setEmailStatusMsg(`Error: ${result.status} ${result.text}`)
+                }
+            })
+    }
+
+    const clearForm = (e) => {
+        e.target.userName.value = null;
+        e.target.userEmail.value = null;
+        e.target.message.value = null;
     }
 
     return (
         <>
             <Form onSubmit={handleFormSubmit}>
-                <p>{emailStatusMsg}</p>                 
                 <h3>Contact Us</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -39,6 +52,7 @@ export default function Footer() {
                 <Button variant="outline-dark" type="submit">
                     Submit
                 </Button> 
+                <p><i>{emailStatusMsg}</i></p>                 
             </Form>
         </>
     )
