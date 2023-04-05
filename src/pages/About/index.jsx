@@ -1,11 +1,8 @@
 import Head from "next/head";
-import Clients from "@/components/Clients";
-import Header from "@/components/Header";
-import RentalsControl from "@/components/RentalsControl";
-import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
 import { loadArray } from "@/utils/api";
 
-export default function Home({ pages }) {
+export default function About({ pages }) {
   return (
     <>
       <Head>
@@ -14,12 +11,9 @@ export default function Home({ pages }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Header pages={pages} />
-        <Clients />
-        <RentalsControl />
-        <Footer />
-      </main>
+      <Layout pages={pages}>
+        <div className="text-4xl">about us page</div>
+      </Layout>
     </>
   );
 }
