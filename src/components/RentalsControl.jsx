@@ -2,6 +2,7 @@ import { useState } from "react";
 import RentalList from "./RentalsControl/RentalList";
 import RentalDetails from "./RentalsControl/RentalDetails";
 import GetQuote from "./RentalsControl/GetQuote";
+import Awards from "./Awards";
 
 export default function RentalsControl() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -27,6 +28,7 @@ export default function RentalsControl() {
         )
       }
       <GetQuote items={cart} />
+      <Awards />
     </>
   );
 }
