@@ -12,6 +12,7 @@ export default function RentalDetails({ item, onCloseClick, onSave }) {
         <img key={`${item}${index}`} alt={`Picture of ${item.brand} ${item.model}`} style={{ width: "300px" }} src={photo} />
       ))}
       <p>{item.description}</p>
+      <p><strong><i>${item.baseRate} per week</i></strong></p>
       <Button variant="outline-dark" onClick={() => onSave(item)}>Add to Quote</Button>
       <Button variant="outline-dark" onClick={() => onCloseClick(null)}>
         Close
