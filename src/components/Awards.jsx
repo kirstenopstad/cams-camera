@@ -62,7 +62,7 @@ const renderReview = (review) => {
         <h1>Awards and Reviews!</h1>
         <br/>
         {/* awards */}
-        <div class="card" style={{width: 18`rem`}}>
+        <div class="card" style={{width: `30%`}}>
         <img src={award1} class="card-img-top" alt="an award" />
         <div class="card-body">
             <h5 class="card-title">Local Business award</h5>
