@@ -36,8 +36,9 @@ __User Stories:__
 * As a user, I want to:
   * ✅ Look at equipment available for rent
   * ✅ Description of each item
-    * Weekly Base Price
-    * Photos - different angles
+    * ✅ Weekly Base Price
+    * ✅ Photos - different angles
+
   * ✅ Create quote cart
     * ✅ Add items to quote cart
     * ✅ View List of items added to quote cart
