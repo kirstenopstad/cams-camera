@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
-import award1 from './../../public/img/awards/Award1.png';
+import awardsList from "@/data/AwardsList";
 
 
 
@@ -10,17 +10,17 @@ const [name, setName] = useState("");
 const [rating, setRating] = useState(0);
 const [comment, setComment] = useState("");
 const [reviews, setReviews] = useState([]);
+const [selectedRating, setSelectedRating] = useState(0);
 
 
-
-
+//submits review
 const handleSubmit = (event) => {
-    event.preventDefault();
-    const newReview = {
-        name: name,
-        rating: rating,
-        comment: comment,
-        id: v4(),
+        event.preventDefault();
+        const newReview = {
+            name: name,
+            rating: rating,
+            comment: comment,
+            id: v4(),
     };
 
     //stored locally
@@ -29,13 +29,14 @@ const handleSubmit = (event) => {
 
     reviews.push(newReview);
     localStorage.setItem("reviews", JSON.stringify(reviews));
-
+    // resets form
     setName("");
     setRating(0);
     setComment("");
+    setLeaveReview(false);
 
 };
-
+// gets stored review for render
 useEffect(() => {
     const storedReviews = localStorage.getItem("reviews");
     const reviews = storedReviews ? JSON.parse(storedReviews) : [];
@@ -45,34 +46,45 @@ useEffect(() => {
 
 //renders after refresh
 const renderReview = (review) => {
+    if (selectedRating === 0 || review.rating === selectedRating) {
     return (
     <div key={review.id}>
     <hr />
     <p>Rating: {review.rating}</p>
     <p>Review: "{review.comment}" ~ {review.name}</p>
     </div>
-);
+    );
+    } else {
+        return null;
+    }
 };
+// filter by star change
+const handleFilterChange = (event) => {
+    setSelectedRating(parseInt(event.target.value));
+};
+
 
 
 
     return (
         <>
-
-        <h1>Awards and Reviews!</h1>
+        <h1>Awards!</h1>
         <br/>
-        {/* awards */}
-        <div class="card" style={{width: `30%`}}>
-        <img src={award1} class="card-img-top" alt="an award" />
-        <div class="card-body">
-            <h5 class="card-title">Local Business award</h5>
-            <p class="card-text">Local business award we won in 20XX</p>
+        <div>
+        <div class="row">
+            {awardsList.map((award, id) =>(
+                <div class="col-sm-4" key={id}>
+                <div class="card">
+                <div class="card-body">
+                    <img src={award.photo} class="card-img-top" alt={award.alt} />
+                    <h5 class="card-title">{award.title}</h5>
+                    <p class="card-text">{award.blurb}</p>
+                </div>
+                </div>
+            </div>
+            ))}
+            </div>
         </div>
-        </div>
-
-        {/* <p>"My nephew uses them, he hasn't complained yet. So, they must be good!" ~ Steven Spielberg</p>
-        <p>"My grandson is the best" ~ Cam's Granny Meemaw</p>
-        <p>"Great equipment, at a good price." ~ 2018 Oscar Nominated Cinematographer Rachel Morris</p> */}
         {!leaveReview ? (
         <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>) 
         : (<div>
@@ -115,12 +127,28 @@ const renderReview = (review) => {
         )}
         <hr />
             <div>
-            <h2>All Reviews</h2>
-            {reviews.map(renderReview)}
+            <h4>Filter by Rating</h4>
+            <select value={selectedRating} onChange={handleFilterChange}>
+                <option value="0">All Ratings</option>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+            </select>
+            </div>
+            <div>
+            <h2>Reviews</h2>
+            {reviews.length === 0 ? (
+            <p>No reviews yet.</p>
+            ) : (
+            reviews.map(renderReview)
+            )}
             </div>
             
         <hr />
+        <br/>
+        <hr />
         </>
-        
     )
 }
