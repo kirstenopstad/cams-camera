@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import sendEmail from "../../SendEmail"
+import sendEmail from "@/utils/SendEmail"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 

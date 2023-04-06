@@ -5,7 +5,7 @@ import Cart from "./Cart";
 import PropTypes from "prop-types";
 import styles from "@/styles/Rentals.module.css";
 import buildQuote from "@/utils/buildQuote";
-import sendEmail from "../../../SendEmail";
+import sendEmail from "@/utils/SendEmail";
 import { filterCart } from "@/utils/cart";
 import Table from "react-bootstrap/Table";
 import { collections, db } from "@/utils/firebase";
