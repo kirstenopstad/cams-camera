@@ -1,10 +1,8 @@
 import { useState } from "react";
 import RentalList from "./RentalsControl/RentalList";
-import RentalDetails from "./RentalsControl/RentalDetails";
 import GetQuote from "./RentalsControl/GetQuote";
 
 export default function RentalsControl() {
-  const [selectedItem, setSelectedItem] = useState(null);
   const [cart, setCart] = useState([]);
 
   const handleSave = (item) => {
@@ -14,18 +12,7 @@ export default function RentalsControl() {
   return (
     <>
       <h1>Rentals</h1>
-      {
-        // if selected item show item detail else show item list
-        selectedItem ? (
-          <RentalDetails
-            item={selectedItem}
-            onCloseClick={setSelectedItem}
-            onSave={handleSave}
-          />
-        ) : (
-          <RentalList onItemClick={setSelectedItem} onSave={handleSave} />
-        )
-      }
+      <RentalList onSave={handleSave} />
       <GetQuote items={cart} />
     </>
   );
