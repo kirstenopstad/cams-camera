@@ -59,6 +59,7 @@ __User Stories:__
 
 ### __Further Exploration (Stretch Goals)__
 
+  * Add lookup by Invoice #
   * Checkout with invoice / order number
   * Implement late fees / short lead time
   
