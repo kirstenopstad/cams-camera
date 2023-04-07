@@ -69,6 +69,12 @@ __User Stories:__
 ### Component Drawing
 ![Component Drawing](./public/img/component_diagram.png)
 
+### Design Research
+![Design Research](./public/img/design_research.png)
+
+### Mockup
+![Mockup](./public/img/mockup.png)
+
 ***
 ## Implementation
 1. ✅ Build component drawing
