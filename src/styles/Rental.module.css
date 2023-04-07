@@ -3,7 +3,11 @@
   height: auto;
   position: relative;
   display: block;
-  background-color: aqua;
+}
+
+.card {
+  border-radius: 1%;
+  box-shadow: 2px 2px 15px #27272733;
 }
 
 .cardCarousel div {

@@ -11,13 +11,11 @@ export default function RentalList({ onSave }) {
   return (
     <>
         <Row className={styles.cards}>
-          {/* <section className="lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-4"> */}
             {inventory.map((item) => 
               <Col className={`sm:grid-cols-1 ${styles.cardCol}`}>
                   <Rental key={v4()} item={item} onSave={onSave} />
               </Col>
             )}
-          {/* </section> */}
         </Row>
     </>
   );

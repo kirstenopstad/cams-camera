@@ -26,7 +26,7 @@ export default function Rental({ item, onSave }) {
   };
 
   return (
-    <Card xs={1} lg={2} className={`w-[25rem] h-auto`}>
+    <Card xs={1} lg={2} className={`w-[25rem] h-auto ${styles.card}`}>
       <div className={`${styles.cardCarousel}`}>
         <img
           className="object-fill w-full h-auto aspect-square"
