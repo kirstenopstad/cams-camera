@@ -3,12 +3,11 @@ import { v4 } from "uuid";
 
 export default function Nav({ pages }) {
   return (
-    <div className="w-full h-16 text-white bg-gray-600">
-      <div className="flex flex-row justify-end gap-4 mx-10">
-        <a href="/">Home</a>
+    <div className="w-full h-16 text-2xl font-semibold text-white">
+      <div className="flex flex-row-reverse justify-center gap-4 pt-24 mx-10 sm:pt-32 md:justify-start md:pt-3">
         {pages.map((page) => {
           return (
-            <a href={page} key={v4()}>
+            <a className="hover:text-cam-red drop-shadow-md lg:px-4" href={page} key={v4()}>
               {page === "/"
                 ? null
                 : page.length > 1

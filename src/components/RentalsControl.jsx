@@ -12,12 +12,12 @@ export default function RentalsControl() {
   };
 
   return (
-    <>
+    <div id="rental-control">
       <h1>Rentals</h1>
       <RentalList onSave={handleSave} />
       <Cart items={cart}/>
       <GetQuote items={cart} />
       <Awards />
-    </>
+    </div>
   );
 }
