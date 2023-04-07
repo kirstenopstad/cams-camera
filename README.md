@@ -38,12 +38,13 @@ __User Stories:__
   * ✅ Description of each item
     * ✅ Weekly Base Price
     * ✅ Photos - different angles
+
   * ✅ Create quote cart
     * ✅ Add items to quote cart
     * ✅ View List of items added to quote cart
-    * ✅ Increment item in quote cart
-    * ✅ Decrement item in quote cart
-    * ✅ Empty quote cart
+    * Increment item in quote cart
+    * Decrement item in quote cart
+    * Empty quote cart
 
   * ✅ Get Quote for order
     *  ✅ Price:
@@ -59,7 +60,6 @@ __User Stories:__
 
 ### __Further Exploration (Stretch Goals)__
 
-  * Add lookup by Invoice #
   * Checkout with invoice / order number
   * Implement late fees / short lead time
   
