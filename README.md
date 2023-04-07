@@ -82,13 +82,13 @@ __User Stories:__
 3. ✅ Build Static Components
 4. ✅ Add State
 5. ✅ Add Firebase / Firestore
-6. Create Mockup
+6. ✅ Create Mockup
 7. Style to Match Mockup
 8. Deploy
 
 ***
 ## Goals
-1. Meet MVP
+1.  ✅ Meet MVP
 2. Stretch: 
 3. Stretch: 
 
