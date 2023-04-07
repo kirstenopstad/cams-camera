@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 
 
 
-export default function Cart({ items }) {
+export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
   const [newItems, setNewItems] = useState([]);
   const [count, setCount] = useState({});
 
@@ -21,18 +21,24 @@ export default function Cart({ items }) {
   return (
     <div className={`${styles.cart}`}>
       <h2>Cart</h2>
+      <img 
+        onClick={onClose}
+        src="/img/icons/x-lg.svg" 
+        alt="Close cart"/>
       <Table>
         <tbody>
           {newItems.map((item) => {
             const itemName = item.model.replace(/ /g, "_");
             return (
-              <tr key={itemName} className={`${styles.itemRow}`}>
-                <td>
+              <tr key={itemName} >
+                <td className={`${styles.qtyCell}`}>
                 <img 
+                  onClick={() => {addItem(item)}}
                   src="/img/icons/plus-lg.svg" 
                   alt={`Add one ${item.brand} ${item.model}`}/>
                   {count[itemName]}
                 <img 
+                  onClick={() => {remItem(item)}}
                   src="/img/icons/dash.svg" 
                   alt={`Remove one ${item.brand} ${item.model}`}/>
                 </td>
@@ -41,8 +47,9 @@ export default function Cart({ items }) {
                 </td>
                 <td>
                   <img 
-                  src="/img/icons/trash3.svg" 
-                  alt={`Remove all ${item.brand} ${item.model}`}/>
+                    onClick={() => {remAllItem(item)}}
+                    src="/img/icons/trash3.svg" 
+                    alt={`Remove all ${item.brand} ${item.model}`}/>
                 </td>
               </tr>
             );
@@ -50,11 +57,14 @@ export default function Cart({ items }) {
           )}
       </tbody>
       </Table>
-      
     </div>
   );
 }
 
 Cart.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
+  addItem: PropTypes.func, 
+  remItem: PropTypes.func, 
+  remAllItem: PropTypes.func,
+  onClose: PropTypes.func
 };

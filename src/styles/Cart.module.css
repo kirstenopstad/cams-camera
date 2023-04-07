@@ -1,12 +1,32 @@
-.cart {
-  width: 300px;
-  padding: 15px;
-  background-color: antiquewhite;
+.cartIcon {
+  position: fixed;
+  top: 15px;
+  left: 0px;
+  margin-left: 15px;
+  z-index: 9;
 }
 
-.itemRow {
+.cart {
+  width: fit-content;
+  padding: 15px;
+  background-color: white;
+  position: fixed;
+  top: 15px;
+  left: 0px;
+  margin-left: 15px;
+  z-index: 9;
+  border-color: black;
+  border-width: thin;
+  border-radius: 1%;
+  box-shadow: 2px 2px 15px #27272733;
+}
+
+.qtyCell {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-items: center;
+}
+
+.qtyCell img {
+  padding: 0 5px 0 5px;
 }
