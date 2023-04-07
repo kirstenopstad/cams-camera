@@ -6,6 +6,7 @@ import Awards from "./Awards";
 
 export default function RentalsControl() {
   const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false)
 
   const handleSave = (item) => {
     setCart([...cart, item]);
@@ -31,15 +32,26 @@ export default function RentalsControl() {
     setCart(updatedCart)
   }
 
+  const handleToggleCart = () => {
+    setShowCart(!showCart)
+  }
+
   return (
     <div id="rental-control">
       <h1>Rentals</h1>
       <RentalList onSave={handleSave} />
-      { cart ? <Cart 
+      { showCart ? <Cart 
                   items={cart}
-                  
+                  addItem={handleSave}
+                  remItem={handleDecrementItemInCart}
+                  remAllItem={handleRemoveFromCart}
+                  onClose={handleToggleCart}
                   /> 
-              : null }
+              : (cart.length > 0) ? <img 
+              onClick={handleToggleCart}
+              src="/img/icons/cart.svg" 
+              alt="View cart"/> 
+              : null}
       <GetQuote items={cart} />
       <Awards />
     </div>
