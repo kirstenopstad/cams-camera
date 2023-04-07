@@ -11,6 +11,7 @@ const [rating, setRating] = useState(0);
 const [comment, setComment] = useState("");
 const [reviews, setReviews] = useState([]);
 const [selectedRating, setSelectedRating] = useState(0);
+const [allReviews, setAllReviews] = useState(false);
 const reviewsPerRow = 2;
 const reviewRows = reviews.length > 0 ? 
   Array.from({ length: Math.ceil(reviews.length / reviewsPerRow) }, (_, i) => reviews.slice(i * reviewsPerRow, i * reviewsPerRow + reviewsPerRow)) 
@@ -52,7 +53,7 @@ useEffect(() => {
 const renderReview = (review) => {
     if (selectedRating === 0 || review.rating === selectedRating) {
     return (
-        <div class="col-sm-5">
+        <div >
         <div key={review.id} class="card">
             <div class="card-body">
                 <h5 class="card-title">{review.name}-</h5>
@@ -66,6 +67,8 @@ const renderReview = (review) => {
         return null;
     }
 };
+
+
 // filter by star change
 const handleFilterChange = (event) => {
     setSelectedRating(parseInt(event.target.value));
@@ -84,6 +87,10 @@ function getStarRating(rating) {
 
     return <span className="star-rating">{stars}</span>;
 }
+
+const sortedReviews = reviews.sort((a, b) => b.rating - a.rating).slice(0, 8);
+
+const topReviews = sortedReviews.slice(0, 8);
 
 
 
@@ -119,14 +126,39 @@ function getStarRating(rating) {
                 <option value="5">5 stars</option>
             </select>
             </div>
+
+            {allReviews ? (
+                <button onClick={() => setAllReviews(false)}>See Top Reviews</button>
+            ) : (
+                <button onClick={() => setAllReviews(true)}>See All Reviews</button>
+
+            )}
+            
             {reviews.length === 0 ? (
             <p>No reviews yet.</p>
             ) :  (
-                reviewRows.map((rowReviews, index) => (
-                    <div key={index} class="row">
-                        {rowReviews.map(renderReview)}
+                allReviews ? (
+                    <div className="container">
+                        <div className="row">
+                        {reviews.map((rowReviews, index) => (
+                            <div key={index} class="col-md-6">
+                                {rowReviews.map(renderReview)}
+                            </div>
+                            ))}
+                        </div>
                     </div>
-                )))}
+                        
+                ) : (
+                    <div className="container">
+                        <div className="row">
+                            {topReviews.map((review) => (
+                            <div class="col-md-6" key={review.id}>
+                                {renderReview(review)}
+                            </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
         </div>
         {!leaveReview ? (
         <div>
@@ -179,3 +211,6 @@ function getStarRating(rating) {
         </>
     )
 }
+
+
+
