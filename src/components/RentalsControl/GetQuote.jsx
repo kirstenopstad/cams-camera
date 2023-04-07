@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Cart from "./Cart";
 import PropTypes from "prop-types";
 import styles from "@/styles/Rentals.module.css";
 import buildQuote from "@/utils/buildQuote";

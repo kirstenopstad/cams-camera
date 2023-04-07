@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { filterCart } from "@/utils/cart";
 import styles from "@/styles/Cart.module.css"
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import GetQuote from "./GetQuote";
 
 
 
 export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
   const [newItems, setNewItems] = useState([]);
   const [count, setCount] = useState({});
+  const [showGetQuoteForm, setShowGetQuoteForm] = useState(false)
+  const [clientInfo, setClientInfo] = useState(null)
 
   // filter 1 of each item
   useEffect(() => {
@@ -17,6 +21,10 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
     setNewItems(checkItems.items);
     setCount(checkItems.count);
   }, [items]);
+
+  const handleShowForm = () => {
+    setShowGetQuoteForm(!showGetQuoteForm)
+  }
 
   return (
     <div className={`${styles.cart}`}>
@@ -56,6 +64,11 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
           }
           )}
       </tbody>
+      <br/>
+      {
+        showGetQuoteForm ? <GetQuote items={items} /> : null 
+      }
+      <Button variant="outline-dark" onClick={handleShowForm}>Get Quote</Button>
       </Table>
     </div>
   );
