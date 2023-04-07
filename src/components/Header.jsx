@@ -22,7 +22,7 @@ export default function Header({ pages }) {
         </div>
         <Nav pages={pages} />
         <div className="relative w-10/12 m-auto text-center max-w-[350px] top-20">
-          <p className="font-medium">
+          <p className="font-semibold">
             Providing leading-edge camera equipment for the film & production
             community.
           </p>
@@ -31,7 +31,7 @@ export default function Header({ pages }) {
             best.
           </p>
           <a
-            className="relative top-16 md:top-36 lg:top-64 text-center px-3 py-0.5 border-white border-2 font-medium rounded-md"
+            className="relative top-16 md:top-36 lg:top-64 text-center px-3 py-0.5 hover:border-cam-gray border-2 font-medium rounded-md hover:text-cam-gray"
             href="#rental-control"
           >
             Pull a Quote
