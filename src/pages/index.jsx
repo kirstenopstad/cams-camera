@@ -2,6 +2,7 @@ import Head from "next/head";
 import Clients from "@/components/Clients";
 import RentalsControl from "@/components/RentalsControl";
 import Layout from "@/components/Layout";
+import MailList from "@/components/MailList";
 import { loadArray } from "@/utils/api";
 
 export default function Home({ pages }) {
@@ -16,6 +17,7 @@ export default function Home({ pages }) {
       <Layout pages={pages}>
         <Clients />
         <RentalsControl />
+        <MailList />
       </Layout>
     </>
   );

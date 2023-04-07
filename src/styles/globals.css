@@ -8,7 +8,6 @@ body {
 
 h1, h2 {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  text-align: center;
 }
 
 h1 {
@@ -29,12 +28,7 @@ h3 {
   text-transform: uppercase;
 }
 
-h3, h4, h5, h6 {
-  text-align: left;
-}
- 
 p {
   font-size: medium;
   font-weight: 300;
-  text-align: left;
 }
