@@ -3,6 +3,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import styles from "@/styles/Rental.module.css";
+
 
 export default function Rental({ item, onSave }) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -24,21 +26,32 @@ export default function Rental({ item, onSave }) {
   };
 
   return (
-    <Card xs={1} lg={2} className="w-[25rem] h-auto">
-      <img
-        className="object-fill w-full h-auto aspect-square"
-        alt={`Picture of ${item.brand} ${item.model}`}
-        src={item.photos[currentImage]}
-      />
-      <div className="flex justify-center mt-2 gap-x-4">
-        <button className="inline w-10 border-black border-spacing-1 border-[0.07rem] border-opacity-60 rounded-md hover:text-white hover:bg-neutral-800 font-semibold" onClick={imageLeft}>{`<`}</button>
-        <button className="inline w-10 border-black border-spacing-1 border-[0.07rem] border-opacity-60 rounded-md hover:text-white hover:bg-neutral-800 font-semibold" onClick={imageRight}>{`>`}</button>
+    <Card xs={1} lg={2} className={`w-[25rem] h-auto ${styles.card}`}>
+      <div className={`${styles.cardCarousel}`}>
+        <img
+          className="object-fill w-full h-auto aspect-square"
+          alt={`Picture of ${item.brand} ${item.model}`}
+          src={item.photos[currentImage]}
+        />
+        <div className={`${styles.cardCarouselArrow}`}>
+          <img 
+            src='/img/icons/chevron-left.svg' 
+            alt='View last image' 
+            onClick={imageLeft}/>
+          <img 
+            src='/img/icons/chevron-right.svg' 
+            alt='View next image' 
+            onClick={imageRight}/>
+        </div>
       </div>
+      {/* <div className="flex justify-center mt-2 gap-x-4">
+      </div> */}
       <Card.Body className="text-center">
         <Card.Title>
-          {item.brand} {item.model}
+          <h3>{item.brand} {item.model}</h3>
+          <p>${item.baseRate} per week</p>
         </Card.Title>
-        <Card.Text>{item.description}</Card.Text>
+        {/* <Card.Text>{item.description}</Card.Text> */}
         <Button variant="outline-dark" onClick={() => onSave(item)}>
           Add to Quote
         </Button>
