@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
-import styles from "@/styles/Rentals.module.css";
+import styles from "@/styles/GetQuote.module.css";
 import buildQuote from "@/utils/buildQuote";
 import sendEmail from "@/utils/SendEmail";
 import { filterCart } from "@/utils/cart";
 import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Button from "react-bootstrap/Button";
 import { collections, db } from "@/utils/firebase";
 import { v4 } from "uuid";
 
@@ -23,7 +26,6 @@ function GetQuote({ items }) {
   const [baseCharge, setBaseCharge] = useState("");
   const [deliveryFee, setDeliveryFee] = useState("");
   const [emailStatusMsg, setEmailStatusMsg] = useState(null);
-  const [itemCount, setItemCount] = useState("");
   const [cartSummary, setCartSummary] = useState({});
 
   const minDate = new Date();
@@ -53,11 +55,6 @@ function GetQuote({ items }) {
       // add item subtotal to cart summary
       item.subtotal = itemTotal;
     });
-
-    // gets items count from cart
-    // const itemCount = items.length;
-    // Calculate the base charge based on the number of weeks
-    // const weeklyCharge = itemCount * 50; // this gives us our item per week amount
 
     const baseCharge = numWeeks * weeklySubtotal;
 
@@ -109,14 +106,12 @@ function GetQuote({ items }) {
     });
 
     //store locally
+    // TODO: store in Firebase
     localStorage.setItem("formData", JSON.stringify(formData));
-    //confirmation
-    // alert(`Your count is ${itemCount}`);
-    //updates subtotal state
+
     setSubTotal(subTotal);
     setBaseCharge(baseCharge);
     setDeliveryFee(deliveryFee);
-    setItemCount(itemCount);
     setCartSummary(cartSummary);
     //update formSubmitted state
     setFormSubmitted(true);
@@ -132,12 +127,11 @@ function GetQuote({ items }) {
 
   return (
     <React.Fragment>
-      <h1 className={styles.headerStyle}>Get Your Quote!</h1>
-      <div className={styles.cartStyle}>
-      </div>
       <div className={styles.bodyStyle}>
         {formSubmitted ? (
           <div>
+            <h2>Quote Estimate</h2>
+            <h2>{emailStatusMsg}</h2>
             <Table>
               <thead>
                 <tr>
@@ -151,112 +145,115 @@ function GetQuote({ items }) {
                 {cartSummary.items.map((item) => (
                   <tr key={item.id}>
                     <td>{item.quantity}</td>
-                    <td>
-                      {item.brand} {item.model}
-                    </td>
+                    <td>{item.brand} {item.model}</td>
                     <td>${item.baseRate}</td>
                     <td>${item.subtotal}</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
-            <p>{emailStatusMsg}</p>
-            <h2>Weekly Subtotal: ${baseCharge} </h2>
-            {/* <h2>You are checking out {itemCount} items per week at $50 per item per week.</h2> */}
-            {/* <h2>Cost of duration of rental: ${baseCharge} </h2> */}
-            <h2>Delivery Cost: ${deliveryFee}</h2>
-            <h1>Est. Total: ${subTotal}</h1>
+            <div className={styles.subtotal}>
+
+            <h4 className={styles.quoteSummary}>
+              <span>Weekly Subtotal:</span> 
+              <span>${baseCharge} </span>
+            </h4>
+            <h4 className={styles.quoteSummary}>
+              <span>Delivery Cost:</span> 
+              <span> ${deliveryFee} </span>
+            </h4>
+            <h4 className={styles.quoteSummary}>
+              <span><strong>Est. Total:</strong></span> 
+              <span><strong>${subTotal}</strong></span>
+            </h4>
+            </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            <p>To complete the quoting process, please fill out this form:</p>
+          <Form onSubmit={handleSubmit}>
+            <h2>Get Your Quote</h2>
             <p>
               <em>
                 Please Note: we do require a 2 week lead time for deliveries.
               </em>
             </p>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Email:
-              <input
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Phone Number:
-              <input
-                type="tel"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-                required
-              />
-            </label>
-            <p>Format: 123-456-7890</p>
-            <br />
-            <label>
-              Start Date:
+            <FloatingLabel  controlId="formBasicName"
+                            label="Name"
+                            className="mb-3">
+              <Form.Control type="text"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            placeholder="Name"
+                            required/>
+            </FloatingLabel>
+            <FloatingLabel  controlId="formBasicEmail"
+                            label="Email"
+                            className="mb-3">
+              <Form.Control type="email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            placeholder="Email"
+                            required/>
+            </FloatingLabel>
+            <FloatingLabel  controlId="formBasicPhone"
+                            label="Phone"
+                            className="mb-3">
+              <Form.Control type="tel"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            value={phone}
+                            onChange={(event) => setPhone(event.target.value)}
+                            placeholder="123-456-7890"
+                            required/>
+            </FloatingLabel>
+            <Form.Group className="mb-3" controlId="formBasicStartDate">
+              <Form.Label>Start Date:</Form.Label>
               <DatePicker
+                className={styles.datePicker}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
                 minDate={minDate}
-                placeholderText="select a start date"
+                placeholderText="Click to select start date"
                 required
               />
-            </label>
-            <br />
-            <label>
-              End Date:
+            </Form.Group>            
+            <Form.Group className="mb-3" controlId="formBasicEndDate">
+              <Form.Label>End Date:</Form.Label>
               <DatePicker
+                className={styles.datePicker}
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 startDate={startDate}
                 endDate={endDate}
                 minDate={minDate}
-                placeholderText="select an end date"
+                placeholderText="Click to select end date"
                 required
               />
-            </label>
-            <br />
-            <label>
-              Delivery:
-              <input
+            </Form.Group>            
+            <Form.Group className="mb-3" controlId="formBasicDelivery">
+              <Form.Check
                 type="checkbox"
+                label="Include Delivery"
                 value={delivery}
                 onChange={(event) => setDelivery(event.target.value)}
               />
-            </label>
-            <br />
+            </Form.Group>            
             {delivery && (
-              <label>
-                Address:
-                <input
-                  type="text"
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
+              <FloatingLabel  controlId="formBasicAddress"
+              label="Address"
+              className="mb-3">
+                <Form.Control
+                    type="text"
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
+                    placeholder="Address"
                 />
-              </label>
+              </FloatingLabel>           
             )}
-            <br />
-            <button type="submit">Submit</button>
-          </form>
+            <Button variant="outline-dark" type="submit">Submit</Button> 
+          </Form>
         )}
       </div>
     </React.Fragment>

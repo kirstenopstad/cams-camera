@@ -65,11 +65,10 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
           )}
       </tbody>
       <br/>
-      {
-        showGetQuoteForm ? <GetQuote items={items} /> : null 
-      }
-      <Button variant="outline-dark" onClick={handleShowForm}>Get Quote</Button>
       </Table>
+      {
+        showGetQuoteForm ? <GetQuote items={items} /> : <Button variant="outline-dark" onClick={handleShowForm}>Get Quote</Button> 
+      }
     </div>
   );
 }
