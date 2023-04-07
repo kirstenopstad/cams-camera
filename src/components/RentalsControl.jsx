@@ -15,7 +15,7 @@ export default function RentalsControl() {
     <>
       <h1>Rentals</h1>
       <RentalList onSave={handleSave} />
-      <Cart items={cart}/>
+      { cart ? <Cart items={cart}/> : null }
       <GetQuote items={cart} />
       <Awards />
     </>
