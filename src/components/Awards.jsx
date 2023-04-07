@@ -2,6 +2,25 @@ import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import awardsList from "@/data/AwardsList";
 
+const subReview = {
+    padding: "0.6em 2em",
+    border: "none",
+    outline: "none",
+    color: "rgb(255, 255, 255)",
+    background:  "#1e1e1e",
+    cursor: "pointer",
+    position: "relative",
+    zIndex: "0",
+    borderRadius: "10px",
+    userSelect: "none",
+    touchAction: "manipulation",
+    border: "1rem",
+    borderColor: "#a3a3a3",
+}
+
+
+
+
 
 
 export default function Awards() {
@@ -53,11 +72,18 @@ const renderReview = (review) => {
     if (selectedRating === 0 || review.rating === selectedRating) {
     return (
         <div >
-        <div key={review.id} class="card">
-            <div class="card-body">
-                <h5 class="card-title">{review.name}-</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{getStarRating(review.rating)}</h6>
-                <p class="card-text">"{review.comment}"</p>
+        <div key={review.id} className="card"
+        style={{
+            backgroundColor: "#1e1e1e",
+            color: "white",
+            height: "8rem",
+            margin: "1rem",
+            marginTop: "1rem",
+        }}>
+            <div className="card-body">
+                <h5 className="card-title">{review.name}-</h5>
+                <h6 className="card-subtitle mb-2 text-muted">{getStarRating(review.rating)}</h6>
+                <p className="card-text">"{review.comment}"</p>
             </div>
         </div>
         </div>
@@ -148,95 +174,130 @@ const reviewsToDisplay = allReviews ? reviews : topReviews;
         <h1>Awards!</h1>
         <br/>
         <div>
-        <div class="row">
+        <div className="row">
             {awardsList.map((award, id) =>(
-                <div class="col-sm-4" key={id}>
-                <div class="card">
-                <div class="card-body">
-                    <img src={award.photo} class="card-img-top" alt={award.alt} />
-                    <h5 class="card-title">{award.title}</h5>
-                    <p class="card-text">{award.blurb}</p>
+                <div className="col-sm-4" key={id}>
+                <div className="card">
+                <div className="card-body">
+                    <img src={award.photo} className="card-img-top" alt={award.alt} />
+                    <h5 className="card-title">{award.title}</h5>
+                    <p className="card-text">{award.blurb}</p>
                 </div>
                 </div>
             </div>
             ))}
             </div>
         </div>
-        <div>
-            <h2>Reviews</h2>
+        <div className="image-container bg-cam-gray" 
+        style={{
+            position: "relative",
+            backgroundImage: "url(/img/inventory/red-dragon-cinema-1.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderTop: "1rem solid #963e2a",
+            borderBottom: "1rem solid #963e2a",
+            backgroundBlendMode: "multiply",
+        }}>
             <div>
-            <h4>Filter by Rating</h4>
-            <select value={selectedRating} onChange={handleFilterChange}>
-                <option value="0">All Ratings</option>
-                <option value="1">1 star</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-            </select>
-            </div>
-            
-            {reviews.length === 0 ? (
-            <p>No reviews yet.</p>
-            ) :  (
-                <div className="container">
-                    <h1>Reviews</h1>
-                    {renderReviewRows()}
-                    <div className="text-center">
-                        <button className="btn btn-primary" onClick={toggleShowAllReviews}>
-                        {allReviews ? 'Show top 8 reviews' : 'View all reviews'}
-                        </button>
-                    </div>
-                    </div>)}
-        </div>
-        {!leaveReview ? (
-        <div>
-        <h2>Have something nice to say?</h2>
-        <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>
-        </div>) 
-        : (<div>
-            <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="name">Name:</label>
-                <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                />
-            </div>
-            <div>
-            <label htmlFor="rating">Rating:</label>
-                <select
-                id="rating"
-                value={rating}
-                onChange={(event) => setRating(parseInt(event.target.value))}
-                >
-                <option value="0">Select a rating</option>
-                <option value="1">1 star</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
+                <div style={{
+                    float: "right",
+                    
+                    }}>
+                <h4 style={{color: "white"}}>Filter by Rating</h4>
+                <select value={selectedRating} onChange={handleFilterChange}>
+                    <option value="0">All Ratings</option>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
                 </select>
+                </div>
+                <br />
+                {reviews.length === 0 ? (
+                <p style={{
+                    color: "white",
+                }}>No reviews yet.</p>
+                ) :  (
+                    <div className="container">
+                        <h1 style={{
+                        color: "white",
+                        }}>Reviews</h1>
+                        {renderReviewRows()}
+                        <div className="text-center">
+                            <button type="submit" 
+                            style={subReview}
+                            onClick={toggleShowAllReviews}>
+                            {allReviews ? 'Show top 8 reviews' : 'View all reviews'}
+                            </button>
+                        </div>
+                        <br />
+                        </div>)}
             </div>
-            <div>
-                <label htmlFor="comment">Comment:</label>
-                <textarea
-                id="comment"
-                value={comment}
-                onChange={(event) => setComment(event.target.value)}
-                ></textarea>
+            {!leaveReview ? (
+            <div style={{textAlign: "center"}}>
+            <h2 style={{
+                color: "white",
+            }}>Have something nice to say?</h2>
+            <br/>
+            <button style={subReview} onClick={() => setLeaveReview(true)}>Leave a Review!</button>
+            </div>) 
+            : (<div 
+                style={{
+                    backgroundColor: "#1e1e1e",
+                    color: "white",
+                    height: "auto",
+                    margin: "1rem",
+                    padding: "2rem",
+                    maxWidth: "45%",
+                    width: "100%"
+                }}>
+                <form onSubmit={handleSubmit} >
+                <div>
+                    <label htmlFor="name">Name:</label>
+                    <br />
+                    <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    style={{backgroundColor: "#757575",}}
+                    onChange={(event) => setName(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="rating">Rating:</label>
+                    <br />
+                    <select
+                    id="rating"
+                    value={rating}
+                    style={{backgroundColor: "#757575"}}
+                    onChange={(event) => setRating(parseInt(event.target.value))}
+                    >
+                    <option value="0">Select a rating</option>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="comment">Comment:</label>
+                    <br />
+                    <textarea
+                    id="comment"
+                    value={comment}
+                    style={{backgroundColor: "#757575"}}
+                    onChange={(event) => setComment(event.target.value)}
+                    ></textarea>
+                </div>
+                <button style={subReview}>Submit</button>
+                </form>
+                </div>
+            )}
+            <br />
+            <hr />
             </div>
-            <button type="submit">Submit</button>
-            </form>
-            </div>
-        )}
-        <hr />
-        <br />
-        <hr />
-        <br/>
-        <hr />
         </>
     )
 }
