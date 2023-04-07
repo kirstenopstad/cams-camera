@@ -11,6 +11,10 @@ const [rating, setRating] = useState(0);
 const [comment, setComment] = useState("");
 const [reviews, setReviews] = useState([]);
 const [selectedRating, setSelectedRating] = useState(0);
+const [allReviews, setAllReviews] = useState(false);
+
+
+
 
 
 //submits review
@@ -48,20 +52,93 @@ useEffect(() => {
 const renderReview = (review) => {
     if (selectedRating === 0 || review.rating === selectedRating) {
     return (
-    <div key={review.id}>
-    <hr />
-    <p>Rating: {review.rating}</p>
-    <p>Review: "{review.comment}" ~ {review.name}</p>
-    </div>
-    );
+        <div >
+        <div key={review.id} class="card">
+            <div class="card-body">
+                <h5 class="card-title">{review.name}-</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{getStarRating(review.rating)}</h6>
+                <p class="card-text">"{review.comment}"</p>
+            </div>
+        </div>
+        </div>
+        );
     } else {
         return null;
     }
 };
+
+
 // filter by star change
 const handleFilterChange = (event) => {
     setSelectedRating(parseInt(event.target.value));
 };
+
+function getStarRating(rating) {
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+        stars.push(<i key={i} className="bi bi-star-fill"></i>);
+    } else {
+        stars.push(<i key={i} className="bi bi-star"></i>);
+    }
+    }
+
+    return <span className="star-rating">{stars}</span>;
+}
+
+    // sort reviews by rating in descending order
+    const sortedReviews = reviews.sort((a, b) => b.rating - a.rating);
+
+    // get the top 8 reviews
+    const topReviews = sortedReviews.slice(0, 8);
+
+
+const renderReviewRows = () => {
+    const reviewRows = [];
+
+    // split the reviews into pairs
+    const pairs = reviewsToDisplay.reduce(
+    (acc, item, index) => (index % 2 === 0 ? [...acc, [item]] : [...acc.slice(0, -1), [...acc.slice(-1)[0], item]]),
+    []
+    );
+
+    // render each pair in a row
+    for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i];
+    const isLastRow = i === pairs.length - 1;
+
+    // handle special case for last row with a single review
+    if (isLastRow && pair.length === 1) {
+        reviewRows.push(
+        <div className="row" key={`row-${i}`}>
+            <div className="col-md-6">{renderReview(pair[0])}</div>
+        </div>
+        );
+    } else {
+        reviewRows.push(
+        <div className="row" key={`row-${i}`}>
+            {pair.map((review) => (
+            <div className="col-md-6" key={review.id}>
+                {renderReview(review)}
+            </div>
+            ))}
+        </div>
+        );
+    }
+    }
+
+    return reviewRows;
+};
+
+const toggleShowAllReviews = () => setAllReviews((prev) => !prev);
+const reviewsToDisplay = allReviews ? reviews : topReviews;
+
+
+
+
+
+
 
 
 
@@ -85,8 +162,38 @@ const handleFilterChange = (event) => {
             ))}
             </div>
         </div>
+        <div>
+            <h2>Reviews</h2>
+            <div>
+            <h4>Filter by Rating</h4>
+            <select value={selectedRating} onChange={handleFilterChange}>
+                <option value="0">All Ratings</option>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+            </select>
+            </div>
+            
+            {reviews.length === 0 ? (
+            <p>No reviews yet.</p>
+            ) :  (
+                <div className="container">
+                    <h1>Reviews</h1>
+                    {renderReviewRows()}
+                    <div className="text-center">
+                        <button className="btn btn-primary" onClick={toggleShowAllReviews}>
+                        {allReviews ? 'Show top 8 reviews' : 'View all reviews'}
+                        </button>
+                    </div>
+                    </div>)}
+        </div>
         {!leaveReview ? (
-        <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>) 
+        <div>
+        <h2>Have something nice to say?</h2>
+        <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>
+        </div>) 
         : (<div>
             <form onSubmit={handleSubmit}>
             <div>
@@ -126,29 +233,13 @@ const handleFilterChange = (event) => {
             </div>
         )}
         <hr />
-            <div>
-            <h4>Filter by Rating</h4>
-            <select value={selectedRating} onChange={handleFilterChange}>
-                <option value="0">All Ratings</option>
-                <option value="1">1 star</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-            </select>
-            </div>
-            <div>
-            <h2>Reviews</h2>
-            {reviews.length === 0 ? (
-            <p>No reviews yet.</p>
-            ) : (
-            reviews.map(renderReview)
-            )}
-            </div>
-            
+        <br />
         <hr />
         <br/>
         <hr />
         </>
     )
 }
+
+
+
