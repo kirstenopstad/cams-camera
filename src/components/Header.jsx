@@ -1,11 +1,44 @@
-import Nav from "./Header/Nav"
-import MailList from "./Header/MailList"
+/* eslint-disable @next/next/no-img-element */
+import Nav from "./Header/Nav";
 
-export default function Header({pages}) {
-    return (
-        <div className="w-full">
-            <Nav pages={pages}/>
-            <MailList />
+export default function Header({ pages }) {
+  return (
+    <div
+      className="w-auto h-full min-h-screen text-white border-0 bg-cam-gray"
+      style={{
+        backgroundImage: "url(/img/inventory/nikon-D850-1.jpg)",
+        backgroundBlendMode: "multiply",
+        backgroundSize: "cover",
+        backgroundPositionX: "center",
+      }}
+    >
+      <div className="w-auto h-full min-h-screen border-0">
+        <div className="absolute w-full mt-2">
+          <img
+            className="w-1/3 m-auto md:w-1/4 lg:w-2/12"
+            src="/img/logo3.png"
+            alt="cams camera logo"
+          />
         </div>
-    )
+        <Nav pages={pages} />
+        <div className="relative w-10/12 m-auto text-center max-w-[350px] top-20">
+          <p className="font-medium">
+            Providing leading-edge camera equipment for the film & production
+            community.
+          </p>
+          <p className="font-thin">
+            With a set-ready inventory so that you can focus on what you do
+            best.
+          </p>
+          <a
+            className="relative top-16 md:top-36 lg:top-64 text-center px-3 py-0.5 border-white border-2 font-medium rounded-md"
+            href="#rental-control"
+          >
+            Pull a Quote
+          </a>
+        </div>
+      </div>
+      <div className="w-full h-6 bg-cam-red"></div>
+    </div>
+  );
 }
