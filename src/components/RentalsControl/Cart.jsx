@@ -30,8 +30,8 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
           {newItems.map((item) => {
             const itemName = item.model.replace(/ /g, "_");
             return (
-              <tr key={itemName} className={`${styles.itemRow}`}>
-                <td>
+              <tr key={itemName} >
+                <td className={`${styles.qtyCell}`}>
                 <img 
                   onClick={() => {addItem(item)}}
                   src="/img/icons/plus-lg.svg" 

@@ -3,6 +3,7 @@ import RentalList from "./RentalsControl/RentalList";
 import GetQuote from "./RentalsControl/GetQuote";
 import Cart from "./RentalsControl/Cart";
 import Awards from "./Awards";
+import cartIconStyles from "@/styles/Cart.module.css"
 
 export default function RentalsControl() {
   const [cart, setCart] = useState([]);
@@ -48,6 +49,7 @@ export default function RentalsControl() {
                   onClose={handleToggleCart}
                   /> 
               : (cart.length > 0) ? <img 
+              className={cartIconStyles.cartIcon}
               onClick={handleToggleCart}
               src="/img/icons/cart.svg" 
               alt="View cart"/> 
