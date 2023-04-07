@@ -11,6 +11,10 @@ const [rating, setRating] = useState(0);
 const [comment, setComment] = useState("");
 const [reviews, setReviews] = useState([]);
 const [selectedRating, setSelectedRating] = useState(0);
+const reviewsPerRow = 2;
+const reviewRows = reviews.length > 0 ? 
+  Array.from({ length: Math.ceil(reviews.length / reviewsPerRow) }, (_, i) => reviews.slice(i * reviewsPerRow, i * reviewsPerRow + reviewsPerRow)) 
+    : [];
 
 
 //submits review
@@ -48,12 +52,16 @@ useEffect(() => {
 const renderReview = (review) => {
     if (selectedRating === 0 || review.rating === selectedRating) {
     return (
-    <div key={review.id}>
-    <hr />
-    <p>Rating: {review.rating}</p>
-    <p>Review: "{review.comment}" ~ {review.name}</p>
-    </div>
-    );
+        <div class="col-sm-5">
+        <div key={review.id} class="card">
+            <div class="card-body">
+                <h5 class="card-title">{review.name}-</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{getStarRating(review.rating)}</h6>
+                <p class="card-text">"{review.comment}"</p>
+            </div>
+        </div>
+        </div>
+        );
     } else {
         return null;
     }
@@ -63,6 +71,19 @@ const handleFilterChange = (event) => {
     setSelectedRating(parseInt(event.target.value));
 };
 
+function getStarRating(rating) {
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+        stars.push(<i key={i} className="bi bi-star-fill"></i>);
+    } else {
+        stars.push(<i key={i} className="bi bi-star"></i>);
+    }
+    }
+
+    return <span className="star-rating">{stars}</span>;
+}
 
 
 
@@ -85,8 +106,33 @@ const handleFilterChange = (event) => {
             ))}
             </div>
         </div>
+        <div>
+            <h2>Reviews</h2>
+            <div>
+            <h4>Filter by Rating</h4>
+            <select value={selectedRating} onChange={handleFilterChange}>
+                <option value="0">All Ratings</option>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+            </select>
+            </div>
+            {reviews.length === 0 ? (
+            <p>No reviews yet.</p>
+            ) :  (
+                reviewRows.map((rowReviews, index) => (
+                    <div key={index} class="row">
+                        {rowReviews.map(renderReview)}
+                    </div>
+                )))}
+        </div>
         {!leaveReview ? (
-        <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>) 
+        <div>
+        <h2>Have something nice to say?</h2>
+        <button onClick={() => setLeaveReview(true)}>Leave a Review!</button>
+        </div>) 
         : (<div>
             <form onSubmit={handleSubmit}>
             <div>
@@ -126,26 +172,7 @@ const handleFilterChange = (event) => {
             </div>
         )}
         <hr />
-            <div>
-            <h4>Filter by Rating</h4>
-            <select value={selectedRating} onChange={handleFilterChange}>
-                <option value="0">All Ratings</option>
-                <option value="1">1 star</option>
-                <option value="2">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-            </select>
-            </div>
-            <div>
-            <h2>Reviews</h2>
-            {reviews.length === 0 ? (
-            <p>No reviews yet.</p>
-            ) : (
-            reviews.map(renderReview)
-            )}
-            </div>
-            
+        <br />
         <hr />
         <br/>
         <hr />
