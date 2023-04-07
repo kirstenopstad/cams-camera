@@ -135,9 +135,6 @@ function GetQuote({ items }) {
     <React.Fragment>
       <h1 className={styles.headerStyle}>Get Your Quote!</h1>
       <div className={styles.cartStyle}>
-        <h4>Your cart:</h4>
-        <Cart items={items} />
-        <hr />
       </div>
       <div className={styles.bodyStyle}>
         {formSubmitted ? (
