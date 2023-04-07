@@ -1,6 +1,5 @@
 import { useState } from "react";
 import RentalList from "./RentalsControl/RentalList";
-import GetQuote from "./RentalsControl/GetQuote";
 import Cart from "./RentalsControl/Cart";
 import Awards from "./Awards";
 import cartIconStyles from "@/styles/Cart.module.css"
@@ -48,13 +47,15 @@ export default function RentalsControl() {
                   remAllItem={handleRemoveFromCart}
                   onClose={handleToggleCart}
                   /> 
-              : (cart.length > 0) ? <img 
-              className={cartIconStyles.cartIcon}
-              onClick={handleToggleCart}
-              src="/img/icons/cart.svg" 
-              alt="View cart"/> 
+              : (cart.length > 0) ? 
+              <div className={cartIconStyles.cartWrapper}>
+                <img 
+                className={cartIconStyles.cartIcon}
+                onClick={handleToggleCart}
+                src="/img/icons/cart.svg" 
+                alt="View cart"/> 
+              </div>
               : null}
-      <GetQuote items={cart} />
       <Awards />
     </div>
   );
