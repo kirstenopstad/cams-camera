@@ -12,10 +12,9 @@ const [comment, setComment] = useState("");
 const [reviews, setReviews] = useState([]);
 const [selectedRating, setSelectedRating] = useState(0);
 const [allReviews, setAllReviews] = useState(false);
-const reviewsPerRow = 2;
-const reviewRows = reviews.length > 0 ? 
-  Array.from({ length: Math.ceil(reviews.length / reviewsPerRow) }, (_, i) => reviews.slice(i * reviewsPerRow, i * reviewsPerRow + reviewsPerRow)) 
-    : [];
+
+
+
 
 
 //submits review
@@ -88,9 +87,59 @@ function getStarRating(rating) {
     return <span className="star-rating">{stars}</span>;
 }
 
-const sortedReviews = reviews.sort((a, b) => b.rating - a.rating).slice(0, 8);
+    // sort reviews by rating in descending order
+    const sortedReviews = reviews.sort((a, b) => b.rating - a.rating);
 
-const topReviews = sortedReviews.slice(0, 8);
+    // get the top 8 reviews
+    const topReviews = sortedReviews.slice(0, 8);
+
+
+const renderReviewRows = () => {
+    const reviewRows = [];
+
+    // split the reviews into pairs
+    const pairs = reviewsToDisplay.reduce(
+    (acc, item, index) => (index % 2 === 0 ? [...acc, [item]] : [...acc.slice(0, -1), [...acc.slice(-1)[0], item]]),
+    []
+    );
+
+    // render each pair in a row
+    for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i];
+    const isLastRow = i === pairs.length - 1;
+
+    // handle special case for last row with a single review
+    if (isLastRow && pair.length === 1) {
+        reviewRows.push(
+        <div className="row" key={`row-${i}`}>
+            <div className="col-md-6">{renderReview(pair[0])}</div>
+        </div>
+        );
+    } else {
+        reviewRows.push(
+        <div className="row" key={`row-${i}`}>
+            {pair.map((review) => (
+            <div className="col-md-6" key={review.id}>
+                {renderReview(review)}
+            </div>
+            ))}
+        </div>
+        );
+    }
+    }
+
+    return reviewRows;
+};
+
+const toggleShowAllReviews = () => setAllReviews((prev) => !prev);
+const reviewsToDisplay = allReviews ? reviews : topReviews;
+
+
+
+
+
+
+
 
 
 
@@ -126,39 +175,19 @@ const topReviews = sortedReviews.slice(0, 8);
                 <option value="5">5 stars</option>
             </select>
             </div>
-
-            {allReviews ? (
-                <button onClick={() => setAllReviews(false)}>See Top Reviews</button>
-            ) : (
-                <button onClick={() => setAllReviews(true)}>See All Reviews</button>
-
-            )}
             
             {reviews.length === 0 ? (
             <p>No reviews yet.</p>
             ) :  (
-                allReviews ? (
-                    <div className="container">
-                        <div className="row">
-                        {reviews.map((rowReviews, index) => (
-                            <div key={index} class="col-md-6">
-                                {rowReviews.map(renderReview)}
-                            </div>
-                            ))}
-                        </div>
+                <div className="container">
+                    <h1>Reviews</h1>
+                    {renderReviewRows()}
+                    <div className="text-center">
+                        <button className="btn btn-primary" onClick={toggleShowAllReviews}>
+                        {allReviews ? 'Show top 8 reviews' : 'View all reviews'}
+                        </button>
                     </div>
-                        
-                ) : (
-                    <div className="container">
-                        <div className="row">
-                            {topReviews.map((review) => (
-                            <div class="col-md-6" key={review.id}>
-                                {renderReview(review)}
-                            </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+                    </div>)}
         </div>
         {!leaveReview ? (
         <div>
