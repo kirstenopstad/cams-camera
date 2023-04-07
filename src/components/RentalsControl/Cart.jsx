@@ -26,7 +26,7 @@ export default function Cart({ items }) {
           {newItems.map((item) => {
             const itemName = item.model.replace(/ /g, "_");
             return (
-              <tr key={itemName}>
+              <tr key={itemName} className={`${styles.itemRow}`}>
                 <td>
                 <img 
                   src="/img/icons/plus-lg.svg" 

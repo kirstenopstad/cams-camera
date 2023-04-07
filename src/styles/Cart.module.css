@@ -3,3 +3,10 @@
   padding: 15px;
   background-color: antiquewhite;
 }
+
+.itemRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+}
