@@ -28,11 +28,12 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
 
   return (
     <div className={`${styles.cart}`}>
-      <h2>Cart</h2>
-      <img 
-        onClick={onClose}
-        src="/img/icons/x-lg.svg" 
-        alt="Close cart"/>
+        <img 
+          style={{ float: 'right'}}
+          onClick={onClose}
+          src="/img/icons/x-lg.svg" 
+          alt="Close cart"/>
+        <h2>Cart</h2>
       <Table>
         <tbody>
           {newItems.map((item) => {
