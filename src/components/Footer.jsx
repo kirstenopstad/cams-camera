@@ -2,6 +2,8 @@ import { useState } from 'react'
 import sendEmail from "@/utils/SendEmail"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import styles from "@/styles/Footer.module.css"
+
 
 export default function Footer() {
     const [emailStatusMsg, setEmailStatusMsg] = useState(null);
@@ -34,7 +36,7 @@ export default function Footer() {
     }
 
     return (
-        <>
+        <div className={styles.footerWrapper}>
             <Form onSubmit={handleFormSubmit}>
                 <h3>Contact Us</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -49,11 +51,27 @@ export default function Footer() {
                     <Form.Label>Message</Form.Label>
                     <Form.Control type="text" as="textarea" style={{ height: '100px' }} placeholder="Message" name="message" required/>
                 </Form.Group>
-                <Button variant="outline-dark" type="submit">
+                <Button variant="outline-light" type="submit">
                     Submit
                 </Button> 
                 <p><i>{emailStatusMsg}</i></p>                 
             </Form>
-        </>
+            <div className={styles.gitLink}>
+                <a href='https://github.com/kirstenopstad/cams-camera'>
+                    <img 
+                    src='/img/icons/github-mark-white.svg' 
+                    alt='View on GitHub'
+                    style={{width: '3em'}}
+                    />
+                </a>
+            </div>
+            <div className={styles.address}>
+                <p>
+                    Cam's Camera<br/>
+                    123 First Ave. Suite 502<br/>
+                    Los Angeles, CA 91919<br/>
+                </p>
+            </div>
+        </div>
     )
 }

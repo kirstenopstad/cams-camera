@@ -17,6 +17,7 @@ export default function RentalList({ onSave }) {
               </Col>
             )}
         </Row>
+        <div className="w-full h-6 bg-cam-red"></div>
     </>
   );
 }

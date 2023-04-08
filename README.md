@@ -1,6 +1,6 @@
 # Cams Cameras
 
-#### By Robert Bryan, Mauro Rosales, & Kirsten Opstad
+#### By [Robert Bryan](https://github.com/robbryandev), [Mauro Rosales](https://github.com/maurorosalesjr), & [Kirsten Opstad](https://github.com/kirstenopstad)
 
 #### A React app for a Camera Rental house
 ***
@@ -42,9 +42,9 @@ __User Stories:__
   * ✅ Create quote cart
     * ✅ Add items to quote cart
     * ✅ View List of items added to quote cart
-    * Increment item in quote cart
-    * Decrement item in quote cart
-    * Empty quote cart
+    * ✅ Increment item in quote cart
+    * ✅ Decrement item in quote cart
+    * ✅ Empty quote cart
 
   * ✅ Get Quote for order
     *  ✅ Price:
@@ -54,9 +54,9 @@ __User Stories:__
       * ✅ Calculates itemized weekly subtotals based on unique item prices
       * ✅ Adds shipping cost if rental requires delivery
 
-  * Sign up for Newsletter
+  * ✅ Sign up for Newsletter
 
-  * Check reviews/testimonials - awards 
+  * ✅ Check reviews/testimonials - awards 
 
 ### __Further Exploration (Stretch Goals)__
 
@@ -83,44 +83,87 @@ __User Stories:__
 4. ✅ Add State
 5. ✅ Add Firebase / Firestore
 6. ✅ Create Mockup
-7. Style to Match Mockup
+7. 📌 Style to Match Mockup
 8. Deploy
 
 ***
 ## Goals
 1.  ✅ Meet MVP
-2. Stretch: 
-3. Stretch: 
+2. Stretch: Checkout with invoice / order number
+3. Stretch: Save quotes & reviews to firebase
 
 ***
 ## Setup/Installation Requirements
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Getting Started
 
-### From Next.js:
 
-First, run the development server:
+* Clone this repo to your workspace.
+* Navigate to the top level of the directory.
+* In the root directory of the project, run this command to install all packages listed in the package.json:
+```
+$ npm install
+```
+* Then, to build and serve the project, run: 
+```
+$ npm run dev
+```
+* Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+***
+
+### Setting up EmailJS
+In order to use the sendEmail utility, which is what enables users to send a message to the site owner and allows users to get quotes emailed to them, you must set up an [EmailJS](https://www.emailjs.com/s) account and set up a few internal features as follows.
+1. Create Free Account
+2. Add new email service & note the **Service ID** (you will need this later)
+![Screenshot of EmailJS](./public//img/documentation/emailJS-setupService.png)
+This will enable emailJs to use whatever email you register as a 'service' to send email on behalf of this web app. This email will be in the 'from' field once all is setup. So pick a good one. 
+<!-- ![Screenshot of Email](./public//img/documentation/emailJS-from.png) -->
+3. Next, set up an two templates: outbound & inbound
+![Screenshot of EmailJS](./public//img/documentation/emailJS-emailTemplate.png)
+  * Set up an Inbound template (like the one below) & save
+    ![Screenshot of EmailJS](./public//img/documentation/emailJS-inboundTemplate.png)
+      * Note that the items in double curly braces {{ like this }} are varaibles that will be populated autmatically by the web app – the inputs you're expecting for the inbound template are:
+        1. {{ user_name }} will be populated by the user's name
+        2. {{ user_email }} will be populated by the user's email address
+        3. {{ message }} will be populated by the message the user typed in into the form
+  * Set up an Outbound template (like the one below) & save
+    ![Screenshot of EmailJS](./public//img/documentation/emailJS-outboundTemplate.png)
+      * Note that the items in double curly braces {{ like this }} are varaibles that will be populated autmatically by the web app – the inputs you're expecting for the outbound template are:
+        1. {{ cc_List }} will be populated with a CC list
+        2. {{ user_email }} will be populated by the user's email address
+        2. {{ subject }} will be populated with the quote info
+        3. {{ message }} will be populated with the quote
+        3. {{ companyName }} will be populated with the company name
+        * Note: to change these values in the code itself, you will need to edit 
+        ```src/utils/SendEmail.js ```
+4. One you have set up **both** inbound & outbound templates, retrieve & save their **Template IDs**
+![Screenshot of EmailJS](./public//img/documentation/emailJS-templateIds.png)
+5. Navigate to your EmailJS account details & retreive your **Public Key**  
+
+### Adding EmailJS credentials to codebase
+1. Create a .env file in the project's root directory
+2. Add .env to your .gitignore file & commit to protect your creds from getting published to github
+3. Update your .env file with the following:
+```
+NEXT_PUBLIC_EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"
+NEXT_PUBLIC_EMAILJS_INTRO_TEMPLATE_ID = "YOUR_INBOUND_TEMPLATE_ID"
+NEXT_PUBLIC_EMAILJS_QUOTE_TEMPLATE_ID = "YOUR_OUTBOUND_TEMPLATE_ID"
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once set up, this should successully send an email from the footer and from the get quote feature in the cart. If you run into errors, make sure your IDs in the .env file are in quotes and that there are no commas or semicolons.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<!-- You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font. -->
 
-## Learn More
+<!-- ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -133,18 +176,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-<!-- 
-* Clone this repo to your workspace.
-* Navigate to the top level of the directory.
-* In the root directory of the project, run this command to install all packages listed in the package.json:
-```
-$ npm install
-```
-* Then, to build and serve the project, run: 
-```
-$ npm run start
-``` -->
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
+
 ***
 ## Known Bugs
 
