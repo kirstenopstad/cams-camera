@@ -17,8 +17,11 @@ export default function Home({ pages }) {
       </Head>
       <Layout pages={pages}>
         <RentalsControl />
+          <div className="w-full h-6 bg-cam-red"></div>
         <Awards />
+          <div className="w-full h-6 bg-cam-red"></div>
         <Brands />
+          <div className="w-full h-6 bg-cam-red"></div>
         <MailList />
       </Layout>
     </>
