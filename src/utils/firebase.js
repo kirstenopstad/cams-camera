@@ -15,19 +15,19 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = app.firestore();
 
 async function getDocById(database, collectionName, docId) {
-    const docRef = doc(database, collectionName, docId);
-    try {
-        const docSnap = await getDoc(docRef);
-        return docSnap.data();
-    } catch(error) {
-        console.log(error)
-        return null
-    }
+  const docRef = doc(database, collectionName, docId);
+  try {
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 const collections = {
-    mail: "mailing-list",
-    res: "quotes"
-}
+  mail: "mailing-list",
+  res: "quotes",
+};
 
 export { app, db, getDocById, collections };

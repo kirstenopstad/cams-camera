@@ -145,7 +145,9 @@ function GetQuote({ items }) {
                 {cartSummary.items.map((item) => (
                   <tr key={item.id}>
                     <td>{item.quantity}</td>
-                    <td>{item.brand} {item.model}</td>
+                    <td>
+                      {item.brand} {item.model}
+                    </td>
                     <td>${item.baseRate}</td>
                     <td>${item.subtotal}</td>
                   </tr>
@@ -153,19 +155,22 @@ function GetQuote({ items }) {
               </tbody>
             </Table>
             <div className={styles.subtotal}>
-
-            <h4 className={styles.quoteSummary}>
-              <span>Weekly Subtotal:</span> 
-              <span>${baseCharge} </span>
-            </h4>
-            <h4 className={styles.quoteSummary}>
-              <span>Delivery Cost:</span> 
-              <span> ${deliveryFee} </span>
-            </h4>
-            <h4 className={styles.quoteSummary}>
-              <span><strong>Est. Total:</strong></span> 
-              <span><strong>${subTotal}</strong></span>
-            </h4>
+              <h4 className={styles.quoteSummary}>
+                <span>Weekly Subtotal:</span>
+                <span>${baseCharge} </span>
+              </h4>
+              <h4 className={styles.quoteSummary}>
+                <span>Delivery Cost:</span>
+                <span> ${deliveryFee} </span>
+              </h4>
+              <h4 className={styles.quoteSummary}>
+                <span>
+                  <strong>Est. Total:</strong>
+                </span>
+                <span>
+                  <strong>${subTotal}</strong>
+                </span>
+              </h4>
             </div>
           </div>
         ) : (
@@ -176,33 +181,45 @@ function GetQuote({ items }) {
                 Please Note: we do require a 2 week lead time for deliveries.
               </em>
             </p>
-            <FloatingLabel  controlId="formBasicName"
-                            label="Name"
-                            className="mb-3">
-              <Form.Control type="text"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                            placeholder="Name"
-                            required/>
+            <FloatingLabel
+              controlId="formBasicName"
+              label="Name"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Name"
+                required
+              />
             </FloatingLabel>
-            <FloatingLabel  controlId="formBasicEmail"
-                            label="Email"
-                            className="mb-3">
-              <Form.Control type="email"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                            placeholder="Email"
-                            required/>
+            <FloatingLabel
+              controlId="formBasicEmail"
+              label="Email"
+              className="mb-3"
+            >
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Email"
+                required
+              />
             </FloatingLabel>
-            <FloatingLabel  controlId="formBasicPhone"
-                            label="Phone"
-                            className="mb-3">
-              <Form.Control type="tel"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                            value={phone}
-                            onChange={(event) => setPhone(event.target.value)}
-                            placeholder="123-456-7890"
-                            required/>
+            <FloatingLabel
+              controlId="formBasicPhone"
+              label="Phone"
+              className="mb-3"
+            >
+              <Form.Control
+                type="tel"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                placeholder="123-456-7890"
+                required
+              />
             </FloatingLabel>
             <Form.Group className="mb-3" controlId="formBasicStartDate">
               <Form.Label>Start Date:</Form.Label>
@@ -217,7 +234,7 @@ function GetQuote({ items }) {
                 placeholderText="Click to select start date"
                 required
               />
-            </Form.Group>            
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEndDate">
               <Form.Label>End Date:</Form.Label>
               <DatePicker
@@ -231,7 +248,7 @@ function GetQuote({ items }) {
                 placeholderText="Click to select end date"
                 required
               />
-            </Form.Group>            
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicDelivery">
               <Form.Check
                 type="checkbox"
@@ -239,20 +256,24 @@ function GetQuote({ items }) {
                 value={delivery}
                 onChange={(event) => setDelivery(event.target.value)}
               />
-            </Form.Group>            
+            </Form.Group>
             {delivery && (
-              <FloatingLabel  controlId="formBasicAddress"
-              label="Address"
-              className="mb-3">
+              <FloatingLabel
+                controlId="formBasicAddress"
+                label="Address"
+                className="mb-3"
+              >
                 <Form.Control
-                    type="text"
-                    value={address}
-                    onChange={(event) => setAddress(event.target.value)}
-                    placeholder="Address"
+                  type="text"
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
+                  placeholder="Address"
                 />
-              </FloatingLabel>           
+              </FloatingLabel>
             )}
-            <Button variant="outline-dark" type="submit">Submit</Button> 
+            <Button variant="outline-dark" type="submit">
+              Submit
+            </Button>
           </Form>
         )}
       </div>

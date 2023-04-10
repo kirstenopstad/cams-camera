@@ -3,7 +3,7 @@ import Head from "next/head";
 import Nav from "@/components/Header/Nav";
 import { loadArray } from "@/utils/api";
 import styles from "@/styles/SubPage.module.css";
-import Container from "react-bootstrap/Container";
+import Link from "next/link";
 import AboutStyles from "@/styles/About.module.css";
 
 export default function About({ pages }) {
@@ -22,11 +22,13 @@ export default function About({ pages }) {
       <main>
         <div className="w-auto h-full min-h-screen p-0 m-0 border-0">
           <div className="absolute top-0 w-full bg-cam-gray">
-            <img
-              className="m-auto w-1/3 max-w-[150px]"
-              src="/img/logo3.png"
-              alt="cams camera logo"
-            />
+            <Link href="/">
+              <img
+                className="m-auto w-1/3 max-w-[150px]"
+                src="/img/logo3.png"
+                alt="cams camera logo"
+              />
+            </Link>
             <div className={`pt-6 m-0 ${styles.navPos}`}>
               <div className={`w-full m-0 p-0 h-8 ${styles.nav}`}>
                 <Nav pages={pages} />

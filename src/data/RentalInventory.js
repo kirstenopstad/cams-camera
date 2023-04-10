@@ -10,49 +10,49 @@ const arriAlexa35Photos = [
   "/img/inventory/Arri-Alexa-35-1.jpg",
   "/img/inventory/Arri-Alexa-35-2.jpg",
   "/img/inventory/Arri-Alexa-35-3.jpg",
-]
+];
 // Arri Mini LF
 const arriMiniLFPhotos = [
   "/img/inventory/Arri-Mini-LF-1.jpg",
   "/img/inventory/Arri-Mini-LF-2.jpg",
   "/img/inventory/Arri-Mini-LF-3.png",
-]
+];
 // Arri Mini
 const arriMiniPhotos = [
   "/img/inventory/Arri-Mini-1.jpg",
   "/img/inventory/Arri-Mini-2.jpg",
   "/img/inventory/Arri-Mini-3.jpg",
-]
+];
 // Sony Venice 2
 const sonyVenice2Photos = [
   "/img/inventory/Sony-Venice2-1.jpg",
   "/img/inventory/Sony-Venice2-2.jpg",
   "/img/inventory/Sony-Venice2-3.jpg",
-]
-// Sony Venice 
+];
+// Sony Venice
 const sonyVenicePhotos = [
   "/img/inventory/Sony-Venice-1.png",
   "/img/inventory/Sony-Venice-2.jpeg",
   "/img/inventory/Sony-Venice-3.jpg",
-]
+];
 // Red Epic
 const redEpicPhotos = [
   "/img/inventory/Red-Epic-1.jpg",
   "/img/inventory/Red-Epic-2.jpg",
   "/img/inventory/Red-Epic-3.jpg",
-]
+];
 // Red Dragon
 const redDragonPhotos = [
   "/img/inventory/Red-Dragon-1.jpg",
   "/img/inventory/Red-Dragon-2.jpg",
   "/img/inventory/Red-Dragon-3.jpg",
-]
+];
 // Moviecam LT
 const moviecamLTPhotos = [
   "/img/inventory/Moviecam-LT-1.jpg",
   "/img/inventory/Moviecam-LT-2.jpg",
   "/img/inventory/Moviecam-LT-3.jpg",
-]
+];
 
 const rentalEquipment = [
   {
