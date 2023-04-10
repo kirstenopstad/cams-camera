@@ -2,21 +2,7 @@ import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import awardsList from "@/data/AwardsList";
 
-const subReview = {
-    padding: "0.6em 2em",
-    border: "none",
-    outline: "none",
-    color: "rgb(255, 255, 255)",
-    background:  "#1e1e1e",
-    cursor: "pointer",
-    position: "relative",
-    zIndex: "0",
-    borderRadius: "10px",
-    userSelect: "none",
-    touchAction: "manipulation",
-    border: "1rem",
-    borderColor: "#a3a3a3",
-}
+
 
 
 
@@ -75,10 +61,12 @@ const renderReview = (review) => {
         <div key={review.id} className="card"
         style={{
             backgroundColor: "#1e1e1e",
+            opacity: "0.9",
             color: "white",
             height: "8rem",
             margin: "1rem",
             marginTop: "1rem",
+            border: "1px solid white"
         }}>
             <div className="card-body">
                 <h5 className="card-title">{review.name}-</h5>
@@ -220,37 +208,57 @@ const reviewsToDisplay = allReviews ? reviews : topReviews;
                 }}>No reviews yet.</p>
                 ) :  (
                     <div className="container">
+                        <div  className="relative p-4 text-center text-white top-20 md:top-32 lg:top-1/2">
                         <h1 style={{
                         color: "white",
                         }}>Reviews</h1>
                         {renderReviewRows()}
                         <div className="text-center">
                             <button type="submit" 
-                            style={subReview}
+                            style={{
+                                marginBottom: "1rem",
+                                marginLeft: "1rem",
+                                }}
+                            className="color: white text-center px-3 py-0.5 hover:border-cam-gray border-2 font-medium rounded-md hover:text-cam-gray" 
                             onClick={toggleShowAllReviews}>
                             {allReviews ? 'Show top 8 reviews' : 'View all reviews'}
                             </button>
                         </div>
                         <br />
+                        </div>
                         </div>)}
             </div>
             {!leaveReview ? (
-            <div style={{textAlign: "center"}}>
+            <div style={{
+                marginBottom: "3rem",
+                padding: "auto"
+            }}>
+            <div className="relative p-4 text-center text-white top-20 md:top-32 lg:top-1/2" >
             <h2 style={{
                 color: "white",
             }}>Have something nice to say?</h2>
             <br/>
-            <button style={subReview} onClick={() => setLeaveReview(true)}>Leave a Review!</button>
+            <button className="text-center px-3 py-0.5 hover:border-cam-gray border-2 font-medium rounded-md hover:text-cam-gray" style={{margin: "1rem"}} onClick={() => setLeaveReview(true)}>Leave a Review!</button>
+            </div>
+            <br />
             </div>) 
-            : (<div 
+            : (<div>
+                <div 
                 style={{
-                    backgroundColor: "#1e1e1e",
+                    backgroundColor: "#757575",
+                    opacity: "0.8",
                     color: "white",
                     height: "auto",
                     margin: "1rem",
-                    padding: "2rem",
-                    maxWidth: "45%",
-                    width: "100%"
+                    marginTop: "2rem",
+                    padding: "auto",
+                    maxWidth: "15rem",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    border: "1px solid white",
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto"
                 }}>
                 <form onSubmit={handleSubmit} >
                 <div>
@@ -260,7 +268,7 @@ const reviewsToDisplay = allReviews ? reviews : topReviews;
                     type="text"
                     id="name"
                     value={name}
-                    style={{backgroundColor: "#757575",}}
+                    style={{backgroundColor: "#a3a3a3",}}
                     onChange={(event) => setName(event.target.value)}
                     />
                 </div>
@@ -270,7 +278,7 @@ const reviewsToDisplay = allReviews ? reviews : topReviews;
                     <select
                     id="rating"
                     value={rating}
-                    style={{backgroundColor: "#757575"}}
+                    style={{backgroundColor: "#a3a3a3"}}
                     onChange={(event) => setRating(parseInt(event.target.value))}
                     >
                     <option value="0">Select a rating</option>
@@ -287,12 +295,13 @@ const reviewsToDisplay = allReviews ? reviews : topReviews;
                     <textarea
                     id="comment"
                     value={comment}
-                    style={{backgroundColor: "#757575"}}
+                    style={{backgroundColor: "#a3a3a3"}}
                     onChange={(event) => setComment(event.target.value)}
                     ></textarea>
                 </div>
-                <button style={subReview}>Submit</button>
+                <button className="color: white text-center px-3 py-0.5 hover:border-cam-gray border-2 font-medium rounded-md hover:text-cam-gray">Submit</button>
                 </form>
+                </div>
                 </div>
             )}
             <br />

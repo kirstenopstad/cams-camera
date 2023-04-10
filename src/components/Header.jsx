@@ -20,7 +20,9 @@ export default function Header({ pages }) {
             alt="cams camera logo"
           />
         </div>
-        <Nav pages={pages} />
+        <div className="pt-24 sm:pt-32 md:pt-3">
+          <Nav pages={pages} />
+        </div>
         <div className="relative w-10/12 m-auto text-center max-w-[350px] top-20">
           <p className="font-semibold">
             Providing leading-edge camera equipment for the film & production
