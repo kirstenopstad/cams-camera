@@ -1,7 +1,6 @@
 import { useState } from "react";
 import RentalList from "./RentalsControl/RentalList";
 import Cart from "./RentalsControl/Cart";
-import Awards from "./Awards";
 import cartIconStyles from "@/styles/Cart.module.css"
 
 export default function RentalsControl() {
@@ -56,7 +55,6 @@ export default function RentalsControl() {
                 alt="View cart"/> 
               </div>
               : null}
-      <Awards />
     </div>
   );
 }
