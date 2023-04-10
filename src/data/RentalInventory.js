@@ -1,10 +1,3 @@
-// Canon 5D
-const canon5dPhotos = [
-  "/img/inventory/canon-5d-1.jpg",
-  "/img/inventory/canon-5d-2.jpg",
-  "/img/inventory/canon-5d-3.jpg",
-];
-
 // Arri Alexa 35
 const arriAlexa35Photos = [
   "/img/inventory/Arri-Alexa-35-1.jpg",

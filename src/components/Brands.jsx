@@ -12,15 +12,12 @@ export default function Brands() {
         {brands.map((client) => {
           return (
             <div className="w-20 h-auto" key={v4()}>
-              <div className="flex justify-center w-20 h-20 mb-2 overflow-hidden align-middle bg-black rounded-full">
-                <img
-                  loading="lazy"
-                  className="object-fit"
-                  style={{ width: client.scale, height: client.scale }}
-                  src={client.logo}
-                  alt={`${client.name}'s Logo`}
-                />
-              </div>
+              <div className="flex flex-col justify-center w-20 h-20 mb-2 overflow-hidden align-middle bg-black rounded-full" style={{
+                backgroundImage: `url(${client.logo})`,
+                backgroundSize: client.scale,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat"
+              }}/>
               <p className="pt-2 font-semibold text-center text-md">
                 {client.name}
               </p>
