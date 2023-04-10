@@ -4,58 +4,121 @@ const canon5dPhotos = [
   "/img/inventory/canon-5d-2.jpg",
   "/img/inventory/canon-5d-3.jpg",
 ];
-// Canon 7D
-const canon7dPhotos = [
-  "/img/inventory/canon-7d-1.jpg",
-  "/img/inventory/canon-7d-2.jpg",
-  "/img/inventory/canon-7d-3.jpg",
-];
-// Nikon D850
-const nikonD850Photos = [
-  "/img/inventory/nikon-D850-1.jpg",
-  "/img/inventory/nikon-D850-2.jpg",
-  "/img/inventory/nikon-D850-3.jpg",
-];
-// Red Dragon Cinema Camera
+
+// Arri Alexa 35
+const arriAlexa35Photos = [
+  "/img/inventory/Arri-Alexa-35-1.jpg",
+  "/img/inventory/Arri-Alexa-35-2.jpg",
+  "/img/inventory/Arri-Alexa-35-3.jpg",
+]
+// Arri Mini LF
+const arriMiniLFPhotos = [
+  "/img/inventory/Arri-Mini-LF-1.jpg",
+  "/img/inventory/Arri-Mini-LF-2.jpg",
+  "/img/inventory/Arri-Mini-LF-3.png",
+]
+// Arri Mini
+const arriMiniPhotos = [
+  "/img/inventory/Arri-Mini-1.jpg",
+  "/img/inventory/Arri-Mini-2.jpg",
+  "/img/inventory/Arri-Mini-3.jpg",
+]
+// Sony Venice 2
+const sonyVenice2Photos = [
+  "/img/inventory/Sony-Venice2-1.jpg",
+  "/img/inventory/Sony-Venice2-2.jpg",
+  "/img/inventory/Sony-Venice2-3.jpg",
+]
+// Sony Venice 
+const sonyVenicePhotos = [
+  "/img/inventory/Sony-Venice-1.png",
+  "/img/inventory/Sony-Venice-2.jpeg",
+  "/img/inventory/Sony-Venice-3.jpg",
+]
+// Red Epic
+const redEpicPhotos = [
+  "/img/inventory/Red-Epic-1.jpg",
+  "/img/inventory/Red-Epic-2.jpg",
+  "/img/inventory/Red-Epic-3.jpg",
+]
+// Red Dragon
 const redDragonPhotos = [
-  "/img/inventory/red-dragon-cinema-1.jpg",
-  "/img/inventory/red-dragon-cinema-2.jpg",
-  "/img/inventory/red-dragon-cinema-3.jpg",
-];
+  "/img/inventory/Red-Dragon-1.jpg",
+  "/img/inventory/Red-Dragon-2.jpg",
+  "/img/inventory/Red-Dragon-3.jpg",
+]
+// Moviecam LT
+const moviecamLTPhotos = [
+  "/img/inventory/Moviecam-LT-1.jpg",
+  "/img/inventory/Moviecam-LT-2.jpg",
+  "/img/inventory/Moviecam-LT-3.jpg",
+]
 
 const rentalEquipment = [
   {
-    id: "CANON-5D",
-    brand: "Canon",
-    model: "5D DSLR",
-    photos: canon5dPhotos,
-    description: `4K Motion JPEG video (DCI cinema-type 4096 x 2160) at 30p or 24p; in-camera still frame grab* of 4K 8.8-Megapixel images; multiple video options include Full HD up to 60p, and HD up to 120p.`,
-    baseRate: 200,
+    id: "ARRI-Alexa-35",
+    brand: "Arri",
+    model: "Alexa 35",
+    photos: arriAlexa35Photos,
+    description: `ALEXA 35 is a 4K Super 35 camera that elevates digital cinematography to unprecedented heights. ARRI’s first new sensor for 12 years builds on the evolution of the ALEXA family over that period, delivering 2.5 stops more dynamic range, film-like highlight handling, better low light performance, and richer colors. `,
+    baseRate: 4000,
   },
   {
-    id: "CANON-7D",
-    brand: "Canon",
-    model: "7D DSLR",
-    photos: canon7dPhotos,
-    description: `Canon EOS 7D can capture true HD 1080p video at 30 frames per second.`,
-    baseRate: 100,
+    id: "ARRI-MiniLF",
+    brand: "Arri",
+    model: "Mini LF",
+    photos: arriMiniLFPhotos,
+    description: `Embraced by the world’s leading filmmakers as soon as it was announced, the ALEXA Mini LF is ARRI’s flagship large-format camera. Versatile and adaptable due to its compact size, low weight, and multiple recording formats, the Mini LF offers the best overall image quality for large format and an exciting new REVEAL Color Science post workflow. `,
+    baseRate: 2525,
   },
   {
-    id: "NIKON-D850",
-    brand: "Nikon",
-    model: "D850",
-    photos: nikonD850Photos,
-    description: `Higher resolution. Faster speed. Greater versatility.
-    The D850 puts staggering image quality and impressive performance within reach of working photographers everywhere.`,
-    baseRate: 300,
+    id: "ARRI-AlexaMini",
+    brand: "Arri",
+    model: "Alexa Mini",
+    photos: arriMiniPhotos,
+    description: `Compact, lightweight, and self-contained - ARRI ALEXA Mini is the small and versatile allrounder in the ARRI camera family. 
+    The symmetrical design permits filming in any orientation, including upside-down and in portrait mode, while multiple accessory points enable highly creative mounting solutions. In addition, ALEXA Mini comes with a series of interchangeable lens mount, allowing the use of B4 video, EF mount stills lenses, or with the even ARRI Signature Primes with the LPL mount for ALEXA Mini.`,
+    baseRate: 2035,
   },
   {
-    id: "RED-DRAGON-CINEMA",
+    id: "SONY-Venice2",
+    brand: "Sony",
+    model: "Venice 2",
+    photos: sonyVenice2Photos,
+    description: `The VENICE 2 builds upon the strength of the original VENICE with new features including a compact design, internal recording and the option for two different sensors: the newly developed full-frame 8.6K sensor or the original 6K VENICE sensor.  The VENICE 2 also inherits popular features from the original VENICE including color science, Dual Base ISO and 8-stops of built-in ND filters.`,
+    baseRate: 3300,
+  },
+  {
+    id: "SONY-Venice",
+    brand: "Sony",
+    model: "Venice",
+    photos: sonyVenicePhotos,
+    description: `The VENICE camera is Sony's first full-frame sensor high-end digital cinematography camera. It is unmatched in the Sony range for the wide array of recording formats it supports, and features Dual Base ISO 500/ISO 2500.`,
+    baseRate: 2580,
+  },
+  {
+    id: "RED-Epic",
     brand: "RED",
-    model: "Dragon Cinema",
+    model: "Epic",
+    photos: redEpicPhotos,
+    description: `THE RED LINEUP OFFERS THE MOST POWERFUL AND ADVANCED CINEMA CAMERA PERFORMANCE ON THE MARKET.`,
+    baseRate: 990,
+  },
+  {
+    id: "RED-Dragon",
+    brand: "RED",
+    model: "Dragon",
     photos: redDragonPhotos,
-    description: `This RED DSMC2 DRAGON-X Camera Kit is part of the RED unified DSMC2 lineup and includes the RED DRAGON-X BRAIN, as well the minimum gear you need to make a functional shooting package.`,
-    baseRate: 500,
+    description: `THE RED LINEUP OFFERS THE MOST POWERFUL AND ADVANCED CINEMA CAMERA PERFORMANCE ON THE MARKET.`,
+    baseRate: 1750,
+  },
+  {
+    id: "MOVIECAM-LT",
+    brand: "Moviecam",
+    model: "LT",
+    photos: moviecamLTPhotos,
+    description: `The organic, tactile, and almost magical qualities of analog film still speak to many of today’s filmmakers. `,
+    baseRate: 1400,
   },
 ];
 

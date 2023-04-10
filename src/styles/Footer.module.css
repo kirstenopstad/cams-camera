@@ -1,0 +1,18 @@
+.footerWrapper {
+  background-color: #963E2A;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+  color: white;
+}
+
+.gitLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.address {
+  color: white;
+}

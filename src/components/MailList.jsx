@@ -23,7 +23,7 @@ export default function MailList() {
       >
         <div className="relative p-4 text-center text-white top-20 md:top-32 lg:top-1/2">
           <div className="relative p-0 m-0 bottom-4 md:bottom-6 md:text-start md:left-10">
-            <h1 className="drop-shadow-md" style={{ textTransform: "none" }}>Never miss a shot.</h1>
+            <h1 className="drop-shadow-md" style={{ textTransform: "none", textAlign: "inherit", marginTop: "inherit"}}>Never miss a shot.</h1>
             <p className="mt-0.5 text-lg font-medium drop-shadow-md">
               Join our mailing list & stay on top of our gear list.
             </p>
