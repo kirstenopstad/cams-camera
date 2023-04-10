@@ -2,18 +2,16 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { filterCart } from "@/utils/cart";
-import styles from "@/styles/Cart.module.css"
+import styles from "@/styles/Cart.module.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import GetQuote from "./GetQuote";
 
-
-
 export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
   const [newItems, setNewItems] = useState([]);
   const [count, setCount] = useState({});
-  const [showGetQuoteForm, setShowGetQuoteForm] = useState(false)
-  const [clientInfo, setClientInfo] = useState(null)
+  const [showGetQuoteForm, setShowGetQuoteForm] = useState(false);
+  const [clientInfo, setClientInfo] = useState(null);
 
   // filter 1 of each item
   useEffect(() => {
@@ -23,61 +21,78 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
   }, [items]);
 
   const handleShowForm = () => {
-    setShowGetQuoteForm(!showGetQuoteForm)
-  }
+    setShowGetQuoteForm(!showGetQuoteForm);
+  };
 
   return (
     <div className={`${styles.cart}`}>
-        <img 
-          style={{ float: 'right'}}
-          onClick={onClose}
-          src="/img/icons/x-lg.svg" 
-          alt="Close cart"/>
-        <h2>Cart</h2>
+      <img
+        loading="lazy"
+        style={{ float: "right" }}
+        onClick={onClose}
+        src="/img/icons/x-lg.svg"
+        alt="Close cart"
+      />
+      <h2>Cart</h2>
       <Table>
         <tbody>
           {newItems.map((item) => {
             const itemName = item.model.replace(/ /g, "_");
             return (
-              <tr key={itemName} >
+              <tr key={itemName}>
                 <td className={`${styles.qtyCell}`}>
-                <img 
-                  onClick={() => {addItem(item)}}
-                  src="/img/icons/plus-lg.svg" 
-                  alt={`Add one ${item.brand} ${item.model}`}/>
+                  <img
+                    loading="lazy"
+                    onClick={() => {
+                      addItem(item);
+                    }}
+                    src="/img/icons/plus-lg.svg"
+                    alt={`Add one ${item.brand} ${item.model}`}
+                  />
                   {count[itemName]}
-                <img 
-                  onClick={() => {remItem(item)}}
-                  src="/img/icons/dash.svg" 
-                  alt={`Remove one ${item.brand} ${item.model}`}/>
+                  <img
+                    loading="lazy"
+                    onClick={() => {
+                      remItem(item);
+                    }}
+                    src="/img/icons/dash.svg"
+                    alt={`Remove one ${item.brand} ${item.model}`}
+                  />
                 </td>
                 <td>
-                {item.brand} {item.model}
+                  {item.brand} {item.model}
                 </td>
                 <td>
-                  <img 
-                    onClick={() => {remAllItem(item)}}
-                    src="/img/icons/trash3.svg" 
-                    alt={`Remove all ${item.brand} ${item.model}`}/>
+                  <img
+                    loading="lazy"
+                    onClick={() => {
+                      remAllItem(item);
+                    }}
+                    src="/img/icons/trash3.svg"
+                    alt={`Remove all ${item.brand} ${item.model}`}
+                  />
                 </td>
               </tr>
             );
-          }
-          )}
-      </tbody>
-      <br/>
+          })}
+        </tbody>
+        <br />
       </Table>
-      {
-        showGetQuoteForm ? <GetQuote items={items} /> : <Button variant="outline-dark" onClick={handleShowForm}>Get Quote</Button> 
-      }
+      {showGetQuoteForm ? (
+        <GetQuote items={items} />
+      ) : (
+        <Button variant="outline-dark" onClick={handleShowForm}>
+          Get Quote
+        </Button>
+      )}
     </div>
   );
 }
 
 Cart.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
-  addItem: PropTypes.func, 
-  remItem: PropTypes.func, 
+  addItem: PropTypes.func,
+  remItem: PropTypes.func,
   remAllItem: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
 };

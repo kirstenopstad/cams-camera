@@ -1,6 +1,6 @@
-const award1 = '/img/awards/Award1.png';
-const award2 = 'img/awards/Award2.png';
-const award3 = 'img/awards/Award3.png';
+const award1 = "/img/awards/Award1.png";
+const award2 = "img/awards/Award2.png";
+const award3 = "img/awards/Award3.png";
 
 const awardsList = [
   {
@@ -23,8 +23,7 @@ const awardsList = [
     title: "Small Business Award",
     blurb: "Award we won for our the best Small Business in 2018.",
     id: 3,
-  }
+  },
+];
 
-]
-
-export default awardsList
+export default awardsList;
