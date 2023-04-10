@@ -8,6 +8,7 @@
 .card {
   border-radius: 1%;
   box-shadow: 2px 2px 15px #27272733;
+  padding: 15px;
 }
 
 .cardCarousel div {
@@ -20,7 +21,7 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: last baseline;
   justify-content: space-between;
 }
 
