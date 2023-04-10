@@ -220,6 +220,9 @@ function GetQuote({ items }) {
                 placeholder="123-456-7890"
                 required
               />
+            <Form.Text className="text-muted ml-3">
+            Format: 123-456-7890
+            </Form.Text>
             </FloatingLabel>
             <Form.Group className="mb-3" controlId="formBasicStartDate">
               <Form.Label>Start Date:</Form.Label>
