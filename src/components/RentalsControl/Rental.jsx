@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import styles from "@/styles/Rental.module.css";
 
-
 export default function Rental({ item, onSave }) {
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -34,21 +33,27 @@ export default function Rental({ item, onSave }) {
           src={item.photos[currentImage]}
         />
         <div className={`${styles.cardCarouselArrow}`}>
-          <img 
-            src='/img/icons/chevron-left.svg' 
-            alt='View last image' 
-            onClick={imageLeft}/>
-          <img 
-            src='/img/icons/chevron-right.svg' 
-            alt='View next image' 
-            onClick={imageRight}/>
+          <img
+            loading="lazy"
+            src="/img/icons/chevron-left.svg"
+            alt="View last image"
+            onClick={imageLeft}
+          />
+          <img
+            loading="lazy"
+            src="/img/icons/chevron-right.svg"
+            alt="View next image"
+            onClick={imageRight}
+          />
         </div>
       </div>
       {/* <div className="flex justify-center mt-2 gap-x-4">
       </div> */}
       <Card.Body className="text-center">
         <Card.Title>
-          <h3>{item.brand} {item.model}</h3>
+          <h3>
+            {item.brand} {item.model}
+          </h3>
           <p>${item.baseRate} per week</p>
         </Card.Title>
         {/* <Card.Text>{item.description}</Card.Text> */}

@@ -17,11 +17,11 @@ export default function Home({ pages }) {
       </Head>
       <Layout pages={pages}>
         <RentalsControl />
-        <div className="w-full h-6 bg-cam-red"/>
+        <div className="w-full h-6 bg-cam-red" />
         <Awards />
-        <div className="w-full h-6 bg-cam-red"/>
+        <div className="w-full h-6 bg-cam-red" />
         <Brands />
-        <div className="w-full h-6 bg-cam-red"/>
+        <div className="w-full h-6 bg-cam-red" />
         <MailList />
       </Layout>
     </>

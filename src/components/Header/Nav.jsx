@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { v4 } from "uuid";
+import Link from "next/link";
 
 export default function Nav({ pages }) {
   return (
@@ -7,13 +8,17 @@ export default function Nav({ pages }) {
       <div className="flex flex-row-reverse justify-center gap-4 mx-10 md:justify-start">
         {pages.map((page) => {
           return (
-            <a className="hover:text-cam-red drop-shadow-md lg:px-4" href={page} key={v4()}>
+            <Link
+              className="hover:text-cam-red drop-shadow-md lg:px-4"
+              href={page}
+              key={v4()}
+            >
               {page === "/"
                 ? null
                 : page.length > 1
                 ? page.split("/")[page.split("/").length - 1]
                 : page}
-            </a>
+            </Link>
           );
         })}
       </div>
