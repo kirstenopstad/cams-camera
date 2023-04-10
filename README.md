@@ -60,10 +60,8 @@ __User Stories:__
 
 ### Todo
 * Update brands with current brands
-* Make footer responsive (row @ all breakpoints)
 * Refactor Awards & Reviews into two separate components
 * Add padding to awards component
-* Remove red div bars from individual components
 * Add Firebase setup instructions to README
 
 ### __Further Exploration (Stretch Goals)__
