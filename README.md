@@ -5,7 +5,7 @@
 #### A React app for a Camera Rental house
 ***
 ![Camera Closeup](./public/img/camera-closeup.jpg)
-*Stock image of coffee beans, courtesy [ShareGrid](https://unsplash.com/@sharegrid) via [Unsplash](https://unsplash.com/).*
+*Stock image of Canon DSLR, courtesy [ShareGrid](https://unsplash.com/@sharegrid) via [Unsplash](https://unsplash.com/).*
 ***
 
 ## Description
@@ -58,12 +58,6 @@ __User Stories:__
 
   * ✅ Check reviews/testimonials - awards 
 
-### Todo
-* Update brands with current brands
-* Refactor Awards & Reviews into two separate components
-* Add padding to awards component
-* Add Firebase setup instructions to README
-
 ### __Further Exploration (Stretch Goals)__
 
   * Checkout with invoice / order number
@@ -89,7 +83,7 @@ __User Stories:__
 4. ✅ Add State
 5. ✅ Add Firebase / Firestore
 6. ✅ Create Mockup
-7. 📌 Style to Match Mockup
+7. ✅ Style to Match Mockup
 8. Deploy
 
 ***
@@ -160,29 +154,70 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"
 ```
 
 Once set up, this should successully send an email from the footer and from the get quote feature in the cart. If you run into errors, make sure your IDs in the .env file are in quotes and that there are no commas or semicolons.
+***
+### Setting up Firebase 
+Google's Firebase is an app development platform that stores app data in the cloud. Firestore is a noSQL database, where data are stored as **documents** in **collections**, like files in a folder. Firestore is used in this app to store mailing list data and can be expanded to hold inventory, quotes and more.
+1. Setup a Firebase account
+    * Visit https://firebase.google.com/
+    * Click 'Get Started' 
+    * Log in or create an accout
+2. Create Firebase project
+    * Visit the [Firebase console](https://console.firebase.google.com/)
+    * Click 'Add project'
+    * Follow the prompts to continue & finish setting up project
+3. Set up Firestore
+    * From the [Firebase console](https://console.firebase.google.com/), click on the project you've just created
+    * On the left sidebar, in the Product Categories menu, click the 'Build' dropdown
+    * Select 'Firestore Database'
+    * From the Cloud Firestore page, click 'Create Database', a setup wizard will launch
+    * For a quick setup: 
+      * Select 'Start in test mode' 
+      * Click the 'Next' button
+      * On the next page, leave defaults and click 'Enable' 
+      * Wait for Firebase to create your database – when it's complete, you'll be redirected to the Firestore database dashboard
+4. Add Firebase to our app
+    * From the [Firebase console](https://console.firebase.google.com/), click on the project you've just created a database for
+    * Underneath the text that reads, 'Get started by adding Firebase to your app'
+      * Click the </> icon to add Firebase to a web app
+      * Create app nickname (PROJECT_NAME-web works well)
+      * Click 'Register app' 
+5. Get Firebase credentials
+    * From the [Firebase console](https://console.firebase.google.com/), click on the project you've just created a database for & registered
+    * On the left sidebar, next to the home icon and 'Project Overview'
+      * Click the gear icon
+      * Select 'Project Settings' from the menu
+    * From the Project Settings page, scroll down to the area labeled 'Your apps', make sure npm is selected as your SDK, and look for a code block that looks like this:
+      ```
+      const firebaseConfig = {
+      apiKey: "abcdefghiJKLMN-oPQrStuv",
+      authDomain: "project-name.firebaseapp.com",
+      projectId: "project-name",
+      storageBucket: "project-name.appspot.com",
+      appId: "1:123456789:web:abc1234567890",
+      };
+      ```
+      Take note! You will need these unique credentials for the next step.
+    
+### Adding Firebase credentials to codebase
+*If you have already set up an .env file to set up EmailJs, skip to step 3*
+1. Create a .env file in the project's root directory
+2. Add .env to your .gitignore file & commit to protect your creds from getting published to github
+3. Update your .env file with the following:
+```
+NEXT_PUBLIC_apiKey="YOUR_FIREBASE_API_KEY"
+NEXT_PUBLIC_authDomain="YOUR_FIREBASE_AUTH_DOMAIN"
+NEXT_PUBLIC_projectId="YOUR_FIREBASE_PROJECT_ID"
+NEXT_PUBLIC_storageBucket="YOUR_FIREBASE_STORAGE_BUCKET"
+NEXT_PUBLIC_messagingSenderId="YOUR_FIREBASE_MESSAGING_SENDER_ID"
+NEXT_PUBLIC_appId="YOUR_FIREBASE_APP_ID"
+```
+Now, data entered in the Mailing List sign up form will be stored in Firestore. To extend functionality, visit the [Firebase docs](https://firebase.google.com/docs/guides#jump-into-firebase-on-your-platform).
 
-<!-- You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font. -->
-
-<!-- ## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
+<!-- ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details -->
 
 ***
 ## Known Bugs
