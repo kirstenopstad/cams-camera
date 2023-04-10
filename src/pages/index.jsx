@@ -4,6 +4,7 @@ import RentalsControl from "@/components/RentalsControl";
 import Layout from "@/components/Layout";
 import MailList from "@/components/MailList";
 import Awards from "@/components/Awards";
+import Reviews from "../components/Reviews";
 import { loadArray } from "@/utils/api";
 
 export default function Home({ pages }) {
@@ -20,6 +21,8 @@ export default function Home({ pages }) {
         <RentalsControl />
         <div className="w-full h-6 bg-cam-red" />
         <Awards />
+        <div className="w-full h-6 bg-cam-red" />
+        <Reviews />
         <div className="w-full h-6 bg-cam-red" />
         <Brands />
         <div className="w-full h-6 bg-cam-red" />
