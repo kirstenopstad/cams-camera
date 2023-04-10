@@ -16,6 +16,7 @@ export default function Home({ pages }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout pages={pages}>
+        <div className="w-full h-6 bg-cam-red"></div>
         <RentalsControl />
         <div className="w-full h-6 bg-cam-red" />
         <Awards />

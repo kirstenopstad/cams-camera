@@ -40,7 +40,6 @@ export default function Header({ pages }) {
           </a>
         </div>
       </div>
-      <div className="w-full h-6 bg-cam-red"></div>
     </div>
   );
 }
