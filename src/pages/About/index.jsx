@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import Layout from "@/components/Layout";
+import Nav from "@/components/Header/Nav";
 import { loadArray } from "@/utils/api";
+import styles from "@/styles/SubPage.module.css";
 
 export default function About({ pages }) {
   return (
@@ -11,9 +13,22 @@ export default function About({ pages }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout pages={pages}>
-        <div className="text-4xl">about us page</div>
-      </Layout>
+      <main>
+        <div className="w-auto h-full min-h-screen p-0 m-0 border-0">
+          <div className="absolute top-0 w-full bg-cam-gray">
+            <img
+              className="m-auto w-1/3 max-w-[150px]"
+              src="/img/logo3.png"
+              alt="cams camera logo"
+            />
+          <div className={`pt-6 m-0 ${styles.navPos}`}>
+            <div className={`w-full m-0 p-0 h-8 ${styles.nav}`}>
+              <Nav pages={pages}/>
+            </div>
+          </div>
+          </div>
+        </div>
+      </main>
     </>
   );
 }
