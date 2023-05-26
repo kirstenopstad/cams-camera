@@ -6,7 +6,7 @@ export default function Header({ pages }) {
     <div
       className="w-auto h-full min-h-screen text-white border-0 bg-cam-gray"
       style={{
-        backgroundImage: "url(/img/inventory/nikon-D850-1.jpg)",
+        backgroundImage: "url(img/inventory/nikon-D850-1.jpg)",
         backgroundBlendMode: "multiply",
         backgroundSize: "cover",
         backgroundPositionX: "center",
