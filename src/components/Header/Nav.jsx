@@ -10,7 +10,7 @@ export default function Nav({ pages }) {
           return (
             <Link
               className="hover:text-cam-red drop-shadow-md lg:px-4"
-              href={page}
+              href={`${process.env.BACKEND_URL}${page}`}
               key={v4()}
             >
               {page === "/"

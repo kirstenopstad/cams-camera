@@ -9,7 +9,7 @@ const nextConfig = {
   // fix asset paths for gh-pages deployment
   assetPrefix: '/cams-camera/',
   env: {
-    HOST_URL: 'https://kirstenopstad.github.io/cams-camera/'
+    BACKEND_URL: 'https://kirstenopstad.github.io/cams-camera'
   },
 }
 
