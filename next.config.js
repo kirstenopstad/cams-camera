@@ -7,7 +7,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // fix asset paths for gh-pages deployment
-  assetPrefix: '/cams-camera/'
+  assetPrefix: '/cams-camera/',
+  // allow for subdirectories
+  basePath: '/cams-camera'
 }
 
 module.exports = nextConfig
