@@ -6,6 +6,8 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // fix asset paths for gh-pages deployment
+  assetPrefix: '/cams-camera/'
 }
 
 module.exports = nextConfig
