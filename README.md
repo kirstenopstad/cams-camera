@@ -1,4 +1,4 @@
-# Cams Cameras
+# [Cams Cameras](https://kirstenopstad.github.io/cams-camera/)
 
 #### By [Robert Bryan](https://github.com/robbryandev), [Mauro Rosales](https://github.com/maurorosalesjr), & [Kirsten Opstad](https://github.com/kirstenopstad)
 
@@ -222,7 +222,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ***
 ## Known Bugs
 
-* No known bugs. If you find one, please email me at kirsten.opstad@gmail.com with the subject **[_Repo Name_] Bug** and include:
+* GH Pages Deployment Bugs:
+  * About & Contact pages & page links not displaying
+  * Favicon not displaying
+* If you find a bug, please email me at kirsten.opstad@gmail.com with the subject **[_Repo Name_] Bug** and include:
   * BUG: _A brief description of the bug_
   * FIX: _Suggestion for solution (if you have one!)_
   * If you'd like to be credited, please also include your **_github user profile link_**
