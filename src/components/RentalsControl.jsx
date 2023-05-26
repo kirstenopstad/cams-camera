@@ -53,7 +53,7 @@ export default function RentalsControl() {
             loading="lazy"
             className={cartIconStyles.cartIcon}
             onClick={handleToggleCart}
-            src="/img/icons/cart.svg"
+            src="img/icons/cart.svg"
             alt="View cart"
           />
         </div>

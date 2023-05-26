@@ -35,13 +35,13 @@ export default function Rental({ item, onSave }) {
         <div className={`${styles.cardCarouselArrow}`}>
           <img
             loading="lazy"
-            src="/img/icons/chevron-left.svg"
+            src="img/icons/chevron-left.svg"
             alt="View last image"
             onClick={imageLeft}
           />
           <img
             loading="lazy"
-            src="/img/icons/chevron-right.svg"
+            src="img/icons/chevron-right.svg"
             alt="View next image"
             onClick={imageRight}
           />

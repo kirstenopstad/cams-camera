@@ -1,4 +1,4 @@
-const award1 = "/img/awards/Award1.png";
+const award1 = "img/awards/Award1.png";
 const award2 = "img/awards/Award2.png";
 const award3 = "img/awards/Award3.png";
 

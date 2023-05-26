@@ -30,7 +30,7 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
         loading="lazy"
         style={{ float: "right" }}
         onClick={onClose}
-        src="/img/icons/x-lg.svg"
+        src="img/icons/x-lg.svg"
         alt="Close cart"
       />
       <h2>Cart</h2>
@@ -46,7 +46,7 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
                     onClick={() => {
                       addItem(item);
                     }}
-                    src="/img/icons/plus-lg.svg"
+                    src="img/icons/plus-lg.svg"
                     alt={`Add one ${item.brand} ${item.model}`}
                   />
                   {count[itemName]}
@@ -55,7 +55,7 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
                     onClick={() => {
                       remItem(item);
                     }}
-                    src="/img/icons/dash.svg"
+                    src="img/icons/dash.svg"
                     alt={`Remove one ${item.brand} ${item.model}`}
                   />
                 </td>
@@ -68,7 +68,7 @@ export default function Cart({ items, addItem, remItem, remAllItem, onClose }) {
                     onClick={() => {
                       remAllItem(item);
                     }}
-                    src="/img/icons/trash3.svg"
+                    src="img/icons/trash3.svg"
                     alt={`Remove all ${item.brand} ${item.model}`}
                   />
                 </td>

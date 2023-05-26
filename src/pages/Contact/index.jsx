@@ -49,7 +49,7 @@ export default function Contact({ pages }) {
             <Link href="/">
               <img
                 className="m-auto w-1/3 max-w-[150px]"
-                src="/img/logo3.png"
+                src="img/logo3.png"
                 alt="cams camera logo"
               />
             </Link>

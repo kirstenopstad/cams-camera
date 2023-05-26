@@ -77,7 +77,7 @@ export default function Footer() {
         <a href="https://github.com/kirstenopstad/cams-camera">
           <img
             loading="lazy"
-            src="/img/icons/github-mark-white.svg"
+            src="img/icons/github-mark-white.svg"
             alt="View on GitHub"
             style={{ width: "3em" }}
           />

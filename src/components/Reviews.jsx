@@ -146,7 +146,7 @@ return (
   className="image-container bg-cam-gray"
   style={{
     position: "relative",
-    backgroundImage: "url(/img/inventory/red-dragon-cinema-1.jpg)",
+    backgroundImage: "url(img/inventory/red-dragon-cinema-1.jpg)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundBlendMode: "multiply",

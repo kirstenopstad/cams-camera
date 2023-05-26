@@ -13,7 +13,7 @@ export default function MailList() {
       <div
         className="w-full h-64 bg-neutral-600 md:h-72 lg:h-96"
         style={{
-          backgroundImage: "url(/img/MailListCamera.png)",
+          backgroundImage: "url(img/MailListCamera.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPositionX: "center",

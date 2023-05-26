@@ -16,7 +16,7 @@ export default function Header({ pages }) {
         <div className="absolute w-full mt-2">
           <img
             className="w-1/3 m-auto md:w-1/4 lg:w-2/12"
-            src="/img/logo3.png"
+            src="img/logo3.png"
             alt="cams camera logo"
           />
         </div>
