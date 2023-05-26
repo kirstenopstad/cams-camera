@@ -8,8 +8,9 @@ const nextConfig = {
   },
   // fix asset paths for gh-pages deployment
   assetPrefix: '/cams-camera/',
-  // allow for subdirectories
-  basePath: '/cams-camera'
+  env: {
+    HOST_URL: 'https://kirstenopstad.github.io/cams-camera/'
+  },
 }
 
 module.exports = nextConfig
